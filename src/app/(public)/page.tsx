@@ -31,7 +31,7 @@ export default async function Home() {
   const settings = await getCachedSettings();
   const faqs = await getCachedFAQs() || [];
 
-  let hospitals = [];
+  let hospitals: any[] = [];
   try {
     await connectToDatabase();
     const rawHospitals = await Hospital.find({ isActive: true }).limit(8).lean().exec();

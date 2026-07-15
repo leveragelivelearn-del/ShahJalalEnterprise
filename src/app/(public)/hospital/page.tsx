@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default async function HospitalsPage() {
-  let hospitals = [];
+  let hospitals: any[] = [];
   try {
     await connectToDatabase();
     const rawHospitals = await Hospital.find({ isActive: true }).lean().exec();
