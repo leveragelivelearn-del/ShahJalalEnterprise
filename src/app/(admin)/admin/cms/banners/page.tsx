@@ -46,7 +46,7 @@ export default function BannersPage() {
       text: `You are about to delete the banner "${title}". This action cannot be undone!`,
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#00D1B2', // rimonayurbedic primary color roughly
+      confirmButtonColor: '#00D1B2', // shahjalalenterprise primary color roughly
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, delete it!',
       background: '#fff',
@@ -148,10 +148,10 @@ export default function BannersPage() {
                 <TableRow key={banner._id} className="group hover:bg-muted/30 transition-colors">
                   <TableCell>
                     <div className="aspect-[21/9] w-full overflow-hidden rounded-md border bg-muted relative">
-                      <img 
-                        src={banner.image} 
-                        alt={banner.title} 
-                        className="absolute inset-0 h-full w-full object-cover" 
+                      <img
+                        src={banner.image}
+                        alt={banner.title}
+                        className="absolute inset-0 h-full w-full object-cover"
                       />
                     </div>
                   </TableCell>
@@ -164,7 +164,7 @@ export default function BannersPage() {
                     </Badge>
                   </TableCell>
                   <TableCell>
-                    <button 
+                    <button
                       onClick={() => toggleStatus(banner._id, banner.isActive)}
                       className="transition-opacity hover:opacity-80"
                     >
@@ -192,18 +192,18 @@ export default function BannersPage() {
                   <TableCell className="text-right">
                     <div className="flex justify-end gap-2">
                       <Link href={`/admin/cms/banners/${banner._id}/edit`}>
-                        <Button 
-                          variant="ghost" 
-                          size="icon" 
+                        <Button
+                          variant="ghost"
+                          size="icon"
                           className="h-8 w-8 hover:text-primary hover:bg-primary/10"
                         >
                           <Edit className="h-4 w-4" />
                         </Button>
                       </Link>
-                      <Button 
-                        variant="ghost" 
-                        size="icon" 
-                        className="h-8 w-8 text-muted-foreground hover:text-destructive hover:bg-destructive/10" 
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-8 w-8 text-muted-foreground hover:text-destructive hover:bg-destructive/10"
                         onClick={() => handleDelete(banner._id, banner.title)}
                       >
                         <Trash className="h-4 w-4" />

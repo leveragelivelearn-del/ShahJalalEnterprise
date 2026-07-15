@@ -50,8 +50,27 @@ import Swal from 'sweetalert2';
 
 const navItems = [
   { href: '/', label: 'Home' },
-  { href: '/shop', label: 'Shop' },
-  { href: '/blog', label: 'Blogs' },
+  {
+    label: 'Our Services',
+    dropdown: [
+      {
+        category: 'Business Consultations',
+        items: [
+          { href: '/export-consulting', label: 'Export' },
+          { href: '/import-consulting', label: 'Import' }
+        ]
+      },
+      {
+        category: 'Medical Consultations',
+        items: [
+          { href: '/medical-tourism', label: 'Medical Tourism' },
+          { href: '/medical-products', label: 'Medical Products' }
+        ]
+      }
+    ]
+  },
+  { href: '/duty-calculator', label: 'Duty Calculator' },
+  { href: '/hospital', label: 'Hospitals' },
   { href: '/contact', label: 'Contact' },
 ];
 
@@ -242,40 +261,50 @@ export default function Navbar() {
                     <Logo onClick={() => setOpen(false)} />
                     <div className="space-y-4 pt-6 border-t font-medium tracking-tight">
                       {navItems.map((item, index) => {
+                        if (item.dropdown) {
+                          return (
+                            <Accordion key={index} type="single" collapsible>
+                              <AccordionItem value="services" className="border-none">
+                                <AccordionTrigger className="py-2 hover:no-underline text-sm font-medium text-left">
+                                  {item.label}
+                                </AccordionTrigger>
+                                <AccordionContent className="pt-2 pl-4 flex flex-col gap-4">
+                                  {item.dropdown.map((sub, sIdx) => (
+                                    <div key={sIdx} className="space-y-2">
+                                      <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">{sub.category}</p>
+                                      <div className="flex flex-col gap-2 pl-2 border-l border-border">
+                                        {sub.items.map((subLink, lIdx) => (
+                                          <Link
+                                            key={lIdx}
+                                            href={subLink.href}
+                                            onClick={() => setOpen(false)}
+                                            className="hover:text-primary text-xs font-semibold"
+                                          >
+                                            {subLink.label}
+                                          </Link>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  ))}
+                                </AccordionContent>
+                              </AccordionItem>
+                            </Accordion>
+                          );
+                        }
+
                         const isActive = pathname === item.href;
                         return (
-                          <React.Fragment key={item.href}>
-                            <Link
-                              href={item.href}
-                              className={`block px-4 py-2 rounded-xl transition-all ${isActive
-                                ? 'bg-primary text-white font-bold shadow-lg shadow-primary/20'
-                                : 'hover:text-primary font-medium'
-                                }`}
-                              onClick={() => setOpen(false)}
-                            >
-                              {item.label}
-                            </Link>
-                            {/* Insert Categories Accordion after Home (index 0) */}
-                            {index === 0 && (
-                              <Accordion type="single" collapsible>
-                                <AccordionItem value="cats" className="border-none">
-                                  <AccordionTrigger className="py-2 hover:no-underline uppercase text-[12px] font-bold tracking-[0.2em] text-left">Categories</AccordionTrigger>
-                                  <AccordionContent className="pt-2 pl-4 flex flex-col gap-3">
-                                    {mainCategories.map(cat => (
-                                      <Link
-                                        key={cat._id}
-                                        href={`/shop?category=${cat.slug}`}
-                                        onClick={() => setOpen(false)}
-                                        className="hover:text-primary text-[11px] font-bold uppercase tracking-[0.1em]"
-                                      >
-                                        {cat.name}
-                                      </Link>
-                                    ))}
-                                  </AccordionContent>
-                                </AccordionItem>
-                              </Accordion>
-                            )}
-                          </React.Fragment>
+                          <Link
+                            key={index}
+                            href={item.href || '/'}
+                            className={`block px-4 py-2 rounded-xl transition-all ${isActive
+                              ? 'bg-primary text-white font-bold shadow-lg shadow-primary/20'
+                              : 'hover:text-primary font-medium'
+                              }`}
+                            onClick={() => setOpen(false)}
+                          >
+                            {item.label}
+                          </Link>
                         );
                       })}
                     </div>
@@ -299,50 +328,7 @@ export default function Navbar() {
 
 
 
-              {/* Wishlist */}
-              <Link
-                href="/dashboard/wishlist"
-                className="hidden sm:flex h-10 w-10 items-center justify-center rounded-xl transition-all cursor-pointer hover:text-primary hover:scale-110"
-                aria-label="Wishlist"
-                onClick={(e) => {
-                  if (status !== 'authenticated') {
-                    e.preventDefault();
-                    toast.error('Please login to view your wishlist');
-                  }
-                }}
-              >
-                <div className="relative">
-                  <Heart className="h-5 w-5" />
-                  {wishlistItems.length > 0 && (
-                    <span className="absolute -top-1.5 -right-1.5 h-3.5 w-3.5 bg-primary text-[8px] font-bold text-white flex items-center justify-center rounded-full shadow-sm animate-in fade-in zoom-in duration-300">
-                      {wishlistItems.length}
-                    </span>
-                  )}
-                </div>
-              </Link>
 
-              {/* Cart */}
-              <div className="hidden md:block">
-                <CartDrawer>
-                  <div
-                    className="flex items-center gap-2 group cursor-pointer hover:text-primary px-2 py-1.5 rounded-full transition-all hover:scale-110 active:scale-95"
-                    aria-label="Shopping Cart"
-                    role="button"
-                  >
-                    <div className="relative">
-                      <ShoppingCart className="h-5 w-5 stroke-[1.5]" />
-                      {cartCount > 0 && (
-                        <span className="absolute -top-2 -right-2 h-4 w-4 bg-primary text-white text-[8px] font-black rounded-full flex items-center justify-center animate-in zoom-in">
-                          {cartCount}
-                        </span>
-                      )}
-                    </div>
-                    <div className="hidden lg:flex flex-col text-left">
-                      <span className="text-[10px] font-bold leading-none tracking-tighter">৳{totalAmount.toLocaleString()}</span>
-                    </div>
-                  </div>
-                </CartDrawer>
-              </div>
 
               {/* User Account (Right end) */}
               <div className="hidden md:flex items-center">
@@ -456,28 +442,53 @@ export default function Navbar() {
         <div className="container mx-auto px-4 flex justify-center">
           <ul className="flex items-center gap-10">
             {navItems.map((item, index) => {
-              const isActive = pathname === item.href;
-
-              return (
-                <React.Fragment key={item.href}>
-                  <li className="flex items-center">
-                    <Link
-                      href={item.href}
-                      className={`text-[12px] font-bold uppercase tracking-[0.25em] transition-all px-4 py-1.5 rounded-full ${isActive
-                        ? 'bg-primary text-white shadow-md shadow-primary/20'
-                        : 'text-foreground/70 hover:text-primary'
-                        }`}
-                    >
-                      {item.label}
-                    </Link>
+              if (item.dropdown) {
+                return (
+                  <li key={index} className="flex items-center">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger className="text-[12px] font-bold uppercase tracking-[0.25em] text-foreground/70 hover:text-primary outline-none cursor-pointer flex items-center gap-1">
+                        {item.label} <ChevronDown className="w-3 h-3 text-primary" />
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent className="p-4 w-64 bg-card border border-border rounded-xl shadow-xl flex flex-col gap-4">
+                        {item.dropdown.map((sub, sIdx) => (
+                          <div key={sIdx} className="space-y-2">
+                            <DropdownMenuLabel className="text-xs font-bold text-primary p-0 uppercase tracking-widest">
+                              {sub.category}
+                            </DropdownMenuLabel>
+                            <DropdownMenuSeparator className="bg-border" />
+                            <div className="flex flex-col gap-1">
+                              {sub.items.map((subLink, lIdx) => (
+                                <DropdownMenuItem key={lIdx} asChild>
+                                  <Link
+                                    href={subLink.href}
+                                    className="w-full text-left text-xs font-bold hover:bg-muted/50 p-2 rounded-lg block"
+                                  >
+                                    {subLink.label}
+                                  </Link>
+                                </DropdownMenuItem>
+                              ))}
+                            </div>
+                          </div>
+                        ))}
+                      </DropdownMenuContent>
+                    </DropdownMenu>
                   </li>
-                  {/* Insert CategoryNav after Home (index 0) */}
-                  {index === 0 && (
-                    <li className="flex items-center h-full">
-                      <CategoryNav />
-                    </li>
-                  )}
-                </React.Fragment>
+                );
+              }
+
+              const isActive = pathname === item.href;
+              return (
+                <li key={index} className="flex items-center">
+                  <Link
+                    href={item.href || '/'}
+                    className={`text-[12px] font-bold uppercase tracking-[0.25em] transition-all px-4 py-1.5 rounded-full ${isActive
+                      ? 'bg-primary text-white shadow-md shadow-primary/20'
+                      : 'text-foreground/70 hover:text-primary'
+                      }`}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
               );
             })}
           </ul>

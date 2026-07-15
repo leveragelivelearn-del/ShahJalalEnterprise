@@ -1,5 +1,5 @@
-const CACHE_NAME = 'rimonayurbedic-cache-v1';
-const OFFLINE_URL = '/offline'; 
+const CACHE_NAME = 'shahjalalenterprise-cache-v1';
+const OFFLINE_URL = '/offline';
 
 const ASSETS_TO_CACHE = [
   '/',
@@ -15,7 +15,7 @@ self.addEventListener('install', (event) => {
       console.log('Service Worker: Caching critical assets');
       // Use a more resilient approach: cache what we can, don't fail everything if one fails
       return Promise.allSettled(
-        ASSETS_TO_CACHE.map(url => 
+        ASSETS_TO_CACHE.map(url =>
           cache.add(url).catch(err => console.error(`Failed to cache ${url}:`, err))
         )
       );
@@ -44,7 +44,7 @@ self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
 
   const url = new URL(event.request.url);
-  
+
   // Skip non-http schemes
   if (!['http:', 'https:'].includes(url.protocol)) return;
 

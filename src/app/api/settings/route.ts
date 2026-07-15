@@ -32,7 +32,7 @@ export async function GET() {
     const settings = await GlobalSettings.findOne().sort({ updatedAt: -1 });
     if (!settings) {
       return NextResponse.json({
-        brandName: process.env.NEXT_PUBLIC_STORE_NAME || "Rimon Ayurbedic",
+        brandName: process.env.NEXT_PUBLIC_STORE_NAME || "Shahjalal Enterprise",
         contact: {
           email: "support@rimonherbal.com",
           phone: "+8801234567890",
@@ -47,8 +47,8 @@ export async function GET() {
           tiktok: '',
           whatsapp: ''
         },
-        marqueeText: "Welcome to Rimon Ayurbedic!",
-        metaTitle: process.env.NEXT_PUBLIC_STORE_NAME || "Rimon Ayurbedic",
+        marqueeText: "Welcome to Shahjalal Enterprise!",
+        metaTitle: process.env.NEXT_PUBLIC_STORE_NAME || "Shahjalal Enterprise",
         metaDescription: "The most popular online shop in Bangladesh.",
         logoUrl: "/logo.webp",
         freeDeliveryThreshold: 0,

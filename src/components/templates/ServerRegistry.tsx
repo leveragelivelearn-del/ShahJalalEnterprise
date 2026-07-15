@@ -20,38 +20,16 @@ export const FooterSelector = ({ style }: { style: string }) => {
 
 // --- PRODUCT DETAILS ---
 import ProductDetailsV1 from './product-details/ProductDetailsV1';
-import ProductDetailsV2 from './product-details/ProductDetailsV2';
-import ProductDetailsV3 from './product-details/ProductDetailsV3';
-import ProductDetailsV4 from './product-details/ProductDetailsV4';
-import ProductDetailsV5 from './product-details/ProductDetailsV5';
 
 export const ProductDetailsSelector = ({ style, product }: { style: string, product: any }) => {
-  switch (style) {
-    case 'v1': return <ProductDetailsV1 product={product} />;
-    case 'v2': return <ProductDetailsV2 product={product} />;
-    case 'v3': return <ProductDetailsV3 product={product} />;
-    case 'v4': return <ProductDetailsV4 product={product} />;
-    case 'v5': return <ProductDetailsV5 product={product} />;
-    default: return <ProductDetailsV1 product={product} />;
-  }
+  return <ProductDetailsV1 product={product} />;
 };
 
 // --- BLOG DETAILS ---
 import BlogDetailsV1 from './blog-details/BlogDetailsV1';
-import BlogDetailsV2 from './blog-details/BlogDetailsV2';
-import BlogDetailsV3 from './blog-details/BlogDetailsV3';
-import BlogDetailsV4 from './blog-details/BlogDetailsV4';
-import BlogDetailsV5 from './blog-details/BlogDetailsV5';
 
 export const BlogDetailsSelector = ({ style, blog, readingTime }: { style: string, blog: any, readingTime: number }) => {
-  switch (style) {
-    case 'v1': return <BlogDetailsV1 blog={blog} readingTime={readingTime} />;
-    case 'v2': return <BlogDetailsV2 blog={blog} readingTime={readingTime} />;
-    case 'v3': return <BlogDetailsV3 blog={blog} readingTime={readingTime} />;
-    case 'v4': return <BlogDetailsV4 blog={blog} readingTime={readingTime} />;
-    case 'v5': return <BlogDetailsV5 blog={blog} readingTime={readingTime} />;
-    default: return <BlogDetailsV1 blog={blog} readingTime={readingTime} />;
-  }
+  return <BlogDetailsV1 blog={blog} readingTime={readingTime} />;
 };
 
 // --- SHOP LISTING ---

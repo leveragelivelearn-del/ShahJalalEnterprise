@@ -111,7 +111,7 @@ export default function LoginPage() {
           >
             <h2 className="text-4xl font-bold text-white mb-4 font-serif">Discover the Best Deals</h2>
             <p className="text-lg text-white/80 max-w-md">
-              Join Rimon Ayurbedic today and get access to exclusive offers, personalized recommendations, and a seamless shopping experience.
+              Join Shahjalal Enterprise today and get access to exclusive offers, personalized recommendations, and a seamless shopping experience.
             </p>
           </motion.div>
         </div>

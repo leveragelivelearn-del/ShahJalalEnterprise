@@ -15,7 +15,7 @@ if (fs.existsSync(envPath)) {
 }
 
 if (!mongodbUri) {
-  mongodbUri = 'mongodb+srv://RimonAyurbedic:xI2QuBaFZsYQ5vRD@cluster0.e5n1hnl.mongodb.net/RimonAyurbedic';
+  mongodbUri = 'mongodb+srv://shahjalalenterprise:xI2QuBaFZsYQ5vRD@cluster0.e5n1hnl.mongodb.net/shahjalalenterprise';
 }
 
 console.log('Connecting to MongoDB...');
@@ -495,7 +495,7 @@ async function seed() {
       await mongoose.connect(mongodbUri);
     } catch (connErr) {
       console.log('SRV connection failed, trying direct connection fallback...');
-      const directUri = 'mongodb://RimonAyurbedic:xI2QuBaFZsYQ5vRD@ac-jrowhop-shard-00-00.e5n1hnl.mongodb.net:27017,ac-jrowhop-shard-00-01.e5n1hnl.mongodb.net:27017,ac-jrowhop-shard-00-02.e5n1hnl.mongodb.net:27017/RimonAyurbedic?ssl=true&authSource=admin';
+      const directUri = 'mongodb://shahjalalenterprise:xI2QuBaFZsYQ5vRD@ac-jrowhop-shard-00-00.e5n1hnl.mongodb.net:27017,ac-jrowhop-shard-00-01.e5n1hnl.mongodb.net:27017,ac-jrowhop-shard-00-02.e5n1hnl.mongodb.net:27017/shahjalalenterprise?ssl=true&authSource=admin';
       await mongoose.connect(directUri);
     }
     console.log('Connected to MongoDB successfully.');
@@ -529,7 +529,7 @@ async function seed() {
     const insertResult = await Product.insertMany(finalProducts);
     console.log(`Seeded ${insertResult.length} products successfully:`);
     insertResult.forEach((prod, i) => {
-      console.log(`[Product ${i+1}] Name: "${prod.name}", SKU: "${prod.sku}"`);
+      console.log(`[Product ${i + 1}] Name: "${prod.name}", SKU: "${prod.sku}"`);
     });
 
   } catch (error) {

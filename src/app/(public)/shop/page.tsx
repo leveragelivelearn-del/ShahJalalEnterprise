@@ -8,7 +8,7 @@ import { Metadata } from 'next';
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getCachedSettings();
-  const brandName = settings?.brandName || 'Rimon Ayurbedic';
+  const brandName = settings?.brandName || 'Shahjalal Enterprise';
   const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
   const headersList = await headers();
   const hostname = headersList.get('host') || 'localhost';
@@ -35,8 +35,8 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function ShopPage({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
   // Fetch initial data on the server with caching
   const [initialProducts, initialCategories, settings] = await Promise.all([
-    getCachedProducts({}, 1000), 
-    getCachedCategories(), 
+    getCachedProducts({}, 1000),
+    getCachedCategories(),
     getCachedSettings()
   ]);
 
@@ -45,11 +45,11 @@ export default async function ShopPage({ searchParams }: { searchParams: Promise
 
   return (
     <Suspense fallback={<ShopFallback />}>
-      <ShopListingSelector 
+      <ShopListingSelector
         style={style}
         productCardStyle={productCardStyle}
-        products={initialProducts} 
-        categories={initialCategories} 
+        products={initialProducts}
+        categories={initialCategories}
         searchParams={searchParams}
       />
     </Suspense>

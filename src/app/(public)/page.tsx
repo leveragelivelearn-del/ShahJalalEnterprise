@@ -1,275 +1,166 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import React from 'react';
 import { Metadata } from 'next';
-import { ArrowRight } from 'lucide-react';
-import connectToDatabase from '@/lib/db';
-import Banner from '@/models/Banner';
-import Category from '@/models/Category';
-import Product from '@/models/Product';
-import Blog from '@/models/Blog';
-import FAQ from '@/models/FAQ';
-import GlobalSettings from '@/models/GlobalSettings';
-import Coupon from '@/models/Coupon';
-import dynamic from 'next/dynamic';
-import { HeroSlider } from '@/components/storefront/HeroSlider';
-import { FreeDeliveryBanner } from '@/components/storefront/FreeDeliveryBanner';
-import {
-  SectionSkeleton,
-  CategoryShowcaseSkeleton,
-  BannerSkeleton,
-  BlogRecentSkeleton,
-  FeaturesSectionSkeleton,
-  FAQSectionSkeleton,
-  TestimonialsSkeleton
-} from '@/components/storefront/Skeletons';
-import { Button } from '@/components/ui/button';
+import { ArrowRight, Globe, Stethoscope, FileText } from 'lucide-react';
 import Link from 'next/link';
-
-import { headers } from 'next/headers';
-import {
-  getCachedBanners,
-  getCachedCategories,
-  getCachedProducts,
-  getTrendingProducts,
-  getCachedBlogs,
-  getCachedFAQs,
-  getCachedSettings,
-  getCachedActiveCoupon
-} from '@/lib/data-fetching';
-import { generateOrganizationSchema } from '@/lib/seo';
-import Script from 'next/script';
-
-const sanitizeForScript = (json: any) => {
-  return JSON.stringify(json).replace(/</g, '\\u003c').replace(/>/g, '\\u003e');
-};
+import { getCachedFAQs, getCachedSettings } from '@/lib/data-fetching';
+import { FAQSection } from '@/components/storefront/FAQSection';
+import { Testimonials } from '@/components/storefront/Testimonials';
+import { SyncedHeroSection } from '@/components/storefront/SyncedHeroSection';
+import { MedicalSupportServices } from '@/components/storefront/MedicalSupportServices';
+import connectToDatabase from '@/lib/db';
+import Hospital from '@/models/Hospital';
+import { OurHospitalsSection } from '@/components/storefront/OurHospitalsSection';
+import { ExperienceSection } from '@/components/storefront/ExperienceSection';
+import { TafFeatureCards } from '@/components/storefront/TafFeatureCards';
+import { TafServicesGrid } from '@/components/storefront/TafServicesGrid';
+import { TafWhyChooseUs } from '@/components/storefront/TafWhyChooseUs';
+import { TafStatsBar } from '@/components/storefront/TafStatsBar';
+import { TafPrecisionSteps } from '@/components/storefront/TafPrecisionSteps';
 
 export async function generateMetadata(): Promise<Metadata> {
-  const [settings, banners] = await Promise.all([
-    getCachedSettings(),
-    getCachedBanners()
-  ]);
-
-  const brandName = settings?.brandName || 'Rimon Ayurbedic';
-  const metaTitle = settings?.metaTitle || brandName;
-  const description = settings?.metaDescription || settings?.siteDescription || 'Your ultimate destination for quality products.';
-  const ogImage = banners?.[0]?.image || settings?.logoUrl || '';
-  
-  const headersList = await headers();
-  const hostname = headersList.get('host') || 'localhost';
-  const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
-  const baseUrl = `${protocol}://${hostname}`;
-
+  const settings = await getCachedSettings();
+  const brandName = settings?.brandName || 'M/S. Shah Jalal Enterprise';
+  const description = settings?.siteDescription || 'Premium Consultation for Global Trade & Medical Tourism';
   return {
-    title: {
-      default: metaTitle,
-      template: `%s | ${brandName}`,
-    },
+    title: brandName,
     description,
-    openGraph: {
-      title: brandName,
-      description,
-      url: baseUrl,
-      siteName: brandName,
-      images: ogImage ? [ogImage] : [],
-      type: 'website',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: brandName,
-      description,
-      images: ogImage ? [ogImage] : [],
-    },
-    metadataBase: new URL(baseUrl),
   };
-}
-
-// Lazy load components below the fold
-const CategoryShowcase = dynamic(() => import('@/components/storefront/CategoryShowcase').then(mod => mod.CategoryShowcase), {
-  loading: () => <CategoryShowcaseSkeleton />
-});
-
-const ProductCarouselSection = dynamic(() => import('@/components/storefront/ProductCarouselSection').then(mod => mod.ProductCarouselSection), {
-  loading: () => <SectionSkeleton />
-});
-
-const BlogRecent = dynamic(() => import('@/components/storefront/BlogRecent').then(mod => mod.BlogRecent), {
-  loading: () => <BlogRecentSkeleton />
-});
-
-const FAQSection = dynamic(() => import('@/components/storefront/FAQSection').then(mod => mod.FAQSection), {
-  loading: () => <FAQSectionSkeleton />
-});
-
-const Testimonials = dynamic(() => import('@/components/storefront/Testimonials').then(mod => mod.Testimonials), {
-  loading: () => <TestimonialsSkeleton />
-});
-
-const FeaturesSection = dynamic(() => import('@/components/storefront/FeaturesSection').then(mod => mod.FeaturesSection), {
-  loading: () => <FeaturesSectionSkeleton />
-});
-
-const LoyaltyBanner = dynamic(() => import('@/components/storefront/LoyaltyBanner').then(mod => mod.LoyaltyBanner), {
-  loading: () => <BannerSkeleton />
-});
-
-const ComboOfferBanner = dynamic(() => import('@/components/storefront/ComboOfferBanner').then(mod => mod.ComboOfferBanner), {
-  loading: () => <BannerSkeleton />
-});
-
-const NewsletterV2 = dynamic(() => import('@/components/storefront/NewsletterV2').then(mod => mod.NewsletterV2), {
-  loading: () => <BannerSkeleton />
-});
-
-async function getHomeData() {
-  try {
-    const [
-      banners,
-      categories,
-      featuredProducts,
-      newArrivals,
-      flashSale,
-      trending,
-      blogs,
-      faqs,
-      settings,
-      activeCoupon
-    ] = await Promise.all([
-      getCachedBanners(),
-      getCachedCategories(),
-      getCachedProducts({ isFeatured: true }, 10),
-      getCachedProducts({ isNewArrival: true }, 10),
-      getCachedProducts({ salePrice: { $exists: true, $ne: null } }, 10, { salePrice: 1 }),
-      getTrendingProducts(10),
-      getCachedBlogs(1),
-      getCachedFAQs(),
-      getCachedSettings(),
-      getCachedActiveCoupon()
-    ]);
-
-    return {
-      banners,
-      categories,
-      featuredProducts,
-      newArrivals,
-      flashSale,
-      trending,
-      blogs,
-      faqs: faqs && faqs.length > 0 ? faqs : [],
-      settings,
-      activeCoupon
-    };
-  } catch (error) {
-    console.error("Error fetching home data via cache:", error);
-    return {
-      banners: [],
-      categories: [],
-      featuredProducts: [],
-      newArrivals: [],
-      flashSale: [],
-      trending: [],
-      blogs: [],
-      faqs: []
-    };
-  }
 }
 
 export default async function Home() {
-  const data = await getHomeData();
-  const ui = {
-    hero: data.settings?.uiTemplates?.hero || 'v1',
-    categories: data.settings?.uiTemplates?.categories || 'v1',
-    productCard: data.settings?.uiTemplates?.productCard || 'v1'
-  };
+  const settings = await getCachedSettings();
+  const faqs = await getCachedFAQs() || [];
 
-  const orgSchema = data.settings ? await generateOrganizationSchema(data.settings) : null;
+  let hospitals = [];
+  try {
+    await connectToDatabase();
+    const rawHospitals = await Hospital.find({ isActive: true }).limit(8).lean().exec();
+    hospitals = rawHospitals.map((h: any) => ({
+      id: h._id.toString(),
+      name: h.name,
+      slug: h.slug,
+      description: h.description,
+      country: h.country,
+      city: h.city
+    }));
+  } catch (error) {
+    console.error('Failed to fetch hospitals:', error);
+  }
 
   return (
-    <div className="flex flex-col min-h-screen">
-      {orgSchema && (
-        <Script
-          id="organization-schema"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: sanitizeForScript(orgSchema) }}
-        />
-      )}
-      {/* 0. Free Delivery Announcement Bar */}
-      <FreeDeliveryBanner settings={data.settings} />
+    <div className="flex flex-col min-h-screen bg-background text-foreground">
+      
+      {/* Premium Hero Section */}
+      <SyncedHeroSection />
 
-      {/* 1. Hero Section */}
-      <HeroSlider banners={data.banners} style={ui.hero} />
+      {/* Taf Inspired: Circular Feature Cards */}
+      <TafFeatureCards />
 
-      {/* 4. Categories Showcase */}
-      <CategoryShowcase categories={data.categories} style={ui.categories} />
+      {/* Core Business Divisions */}
+      <section className="py-20 px-4 md:px-8 max-w-6xl mx-auto space-y-12">
+        <div className="text-center space-y-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-primary font-heading">Our Key Business Divisions</h2>
+          <p className="text-muted-foreground text-md max-w-xl mx-auto">
+            Comprehensive global services designed to navigate trade boundaries and access world-class healthcare.
+          </p>
+        </div>
 
-      {/* 8. Featured Products */}
-      {data.featuredProducts.length > 0 && (
-        <ProductCarouselSection
-          title="Featured Collections"
-          description="Explore our best-selling and most popular products hand-picked just for you."
-          products={data.featuredProducts}
-          viewAllLink="/shop?filter=featured"
-          bgColor="bg-background"
-          cardStyle={ui.productCard}
-        />
-      )}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Import Consultation */}
+          <div className="border border-border bg-card text-card-foreground p-8 rounded-2xl shadow-md flex flex-col justify-between hover:shadow-lg transition-shadow">
+            <div className="space-y-4">
+              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                <Globe className="w-6 h-6" />
+              </div>
+              <h3 className="text-2xl font-bold text-foreground font-heading">Import Consultation</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Unlock global sourcing channels with guidance on customs clearing, international supplier vetting, and shipping logistics.
+              </p>
+            </div>
+            <Link href="/import-consulting" className="mt-8 inline-flex items-center text-sm font-semibold text-primary hover:underline gap-1">
+              Explore Import Services <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
 
-      {/* 8. Loyalty Promotion */}
-      <LoyaltyBanner settings={data.settings} />
+          {/* Export Consultation */}
+          <div className="border border-border bg-card text-card-foreground p-8 rounded-2xl shadow-md flex flex-col justify-between hover:shadow-lg transition-shadow">
+            <div className="space-y-4">
+              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                <FileText className="w-6 h-6" />
+              </div>
+              <h3 className="text-2xl font-bold text-foreground font-heading">Export Consultation</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Start your export business with specialized advice on global market requirements, regulatory paperwork, and buyer sourcing networks.
+              </p>
+            </div>
+            <Link href="/export-consulting" className="mt-8 inline-flex items-center text-sm font-semibold text-primary hover:underline gap-1">
+              Explore Export Services <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
 
-      {/* 3. Flash Sale (Timed) */}
-      {data.flashSale.length > 0 && (
-        <ProductCarouselSection
-          title="Flash Sale"
-          products={data.flashSale}
-          viewAllLink="/shop?filter=sale"
-          isFlashSale={true}
-          bgColor="bg-primary/5"
-          cardStyle={ui.productCard}
-        />
-      )}
+          {/* Medical Tourism */}
+          <div className="border border-border bg-card text-card-foreground p-8 rounded-2xl shadow-md flex flex-col justify-between hover:shadow-lg transition-shadow">
+            <div className="space-y-4">
+              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                <Stethoscope className="w-6 h-6" />
+              </div>
+              <h3 className="text-2xl font-bold text-foreground font-heading">Medical Tourism</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Connect with specialist doctors and premium partner hospitals in India, Thailand, and Singapore. Comprehensive visa, flight, and lodging coordination.
+              </p>
+            </div>
+            <Link href="/medical-tourism" className="mt-8 inline-flex items-center text-sm font-semibold text-primary hover:underline gap-1">
+              Search Doctors & Hospitals <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
 
-      {/* 7. Combo Discount Promotion */}
-      <ComboOfferBanner activeCoupon={data.activeCoupon} settings={data.settings} />
+      {/* Taf Inspired: Services Grid with highlighting */}
+      <TafServicesGrid />
 
-      {/* 6. Trending Products */}
-      {data.trending.length > 0 && (
-        <ProductCarouselSection
-          title="Trending Now"
-          description="The most popular items according to our community ratings and reviews."
-          products={data.trending}
-          viewAllLink="/shop?filter=trending"
-          bgColor="bg-muted/20"
-          cardStyle={ui.productCard}
-        />
-      )}
+      {/* Healthcare Logistics & Support Services */}
+      <MedicalSupportServices />
 
-      {/* 9. Recent Blogs section */}
-      <BlogRecent blogs={data.blogs} />
+      {/* Partner Hospitals Showcase Section */}
+      <OurHospitalsSection initialHospitals={hospitals} />
 
-      {/* 5. New Arrivals */}
-      {data.newArrivals.length > 0 && (
-        <ProductCarouselSection
-          title="New Arrivals"
-          description="Discover the latest additions to our collection. Stay ahead of the curve."
-          products={data.newArrivals}
-          viewAllLink="/shop?filter=new"
-          bgColor="bg-background"
-          cardStyle={ui.productCard}
-        />
-      )}
+      {/* Taf Inspired: Collage / Why Choose Us */}
+      <TafWhyChooseUs />
 
-      {/* 2. Our Features (Trust Badges) */}
-      <FeaturesSection />
+      {/* 30 Years of Experience Section */}
+      <ExperienceSection />
 
-      {/* 8. Testimonials Section */}
+      {/* Taf Inspired: Stats Bar Indicator */}
+      <TafStatsBar />
+
+      {/* Taf Inspired: Precision Workflow Steps */}
+      <TafPrecisionSteps />
+
+      {/* Trust & Verification Badges */}
+      <section className="py-16 bg-muted/20 border-y border-border px-4 md:px-8">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+          <div className="space-y-2">
+            <h4 className="text-3xl font-black text-primary">100%</h4>
+            <p className="text-sm font-bold text-foreground">Verified Global Standards</p>
+          </div>
+          <div className="space-y-2">
+            <h4 className="text-3xl font-black text-primary">24/7</h4>
+            <p className="text-sm font-bold text-foreground">AI Consulting Support</p>
+          </div>
+          <div className="space-y-2">
+            <h4 className="text-3xl font-black text-primary">Partnered</h4>
+            <p className="text-sm font-bold text-foreground">Top-Tier Hospitals Abroad</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
       <Testimonials />
 
-      {/* 11. Newsletter V2 Integration */}
-      <NewsletterV2 />
-
-      {/* 10. FAQ Accordion Section */}
-      <FAQSection faqs={data.faqs} />
+      {/* FAQs */}
+      {faqs.length > 0 && <FAQSection faqs={faqs} />}
 
     </div>
   );
 }
-

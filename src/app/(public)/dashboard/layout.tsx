@@ -76,17 +76,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                     pathname === '/dashboard' ? 'border-primary bg-muted/50' : 'border-transparent'
                   )}
                 >
-                  <ShoppingBag className="mr-3 h-4 w-4" /> My Orders
-                </Link>
-                <Link 
-                  href="/dashboard/wishlist" 
-                  className={cn(
-                    buttonVariants({ variant: 'ghost' }),
-                    "justify-start px-6 h-12 rounded-none border-l-4 w-full",
-                    pathname === '/dashboard/wishlist' ? 'border-primary bg-muted/50' : 'border-transparent'
-                  )}
-                >
-                  <Heart className="mr-3 h-4 w-4" /> Wishlist
+                  <ShoppingBag className="mr-3 h-4 w-4" /> My Applications
                 </Link>
                 <Link 
                   href="/dashboard/profile" 

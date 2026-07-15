@@ -17,7 +17,7 @@
 
 ## 2. Branding & Identity
 *   **Brand Name Representation:** "M/S. Shah Jalal Enterprise" will be designed with exclusive typography (utilizing premium serif fonts like *Cinzel* or *Playfair Display* for headings and clean sans-serif like *Outfit* or *Inter* for body copy).
-*   **Color Palette:** Premium Dark Navy Blue (`#0B192C`) symbolizing trust and global network, Gold/Bronze Accents (`#F1C40F` or `#D4AF37`) indicating exclusivity and quality, and clean off-white backgrounds for maximum readability.
+*   **Color Palette:** Dynamic theme-relative color palettes, customizable directly from the System Design configuration panel (supporting custom colors, primary accents, background options, and premium logo/body typography settings without hardcoded static hex codes).
 
 ---
 

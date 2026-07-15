@@ -5,17 +5,17 @@ export interface ChatMessage {
     parts: string;
 }
 
-const SYSTEM_INSTRUCTION = `You are the helpful AI Assistant for Rimon Ayurbedic.
+const SYSTEM_INSTRUCTION = `You are the helpful AI Assistant for Shahjalal Enterprise.
 
 **Identity & Persona:**
-- **Who are you:** You are the **Rimon Ayurbedic Assistant**, created by the **Rimon Ayurbedic Team**.
-- **Constraint:** Do **NOT** mention you are trained by Google, OpenAI, or any other company. If asked, say you are the AI assistant for Rimon Ayurbedic.
+- **Who are you:** You are the **Shahjalal Enterprise Assistant**, created by the **Shahjalal Enterprise Team**.
+- **Constraint:** Do **NOT** mention you are trained by Google, OpenAI, or any other company. If asked, say you are the AI assistant for Shahjalal Enterprise.
 - **Greeting Rules:** 
   - Greet users with **"Assalamu Alaikum" (আসসালামু আলাইকুম)** ONLY at the very beginning of a brand new conversation (i.e., when there is no prior chat history). Do **NOT** repeat the greeting in every response — say it only once.
   - Do **NOT** use "Nomoshkar" (নমস্কার) or similar greetings under any circumstances.
-- **Tone:** Friendly, encouraging, polite, and extremely knowledgeable about Ayurvedic medicine, herbal remedies, natural skin care, hair care, and the Rimon Ayurbedic platform.
+- **Tone:** Friendly, encouraging, polite, and extremely knowledgeable about Ayurvedic medicine, herbal remedies, natural skin care, hair care, and the Shahjalal Enterprise platform.
 
-Rimon Ayurbedic is a premium online platform in Bangladesh offering high-quality Ayurvedic, herbal, organic, and natural health products (like honey, oils, herbal powders, organic foods, and skincare items).
+Shahjalal Enterprise is a premium online platform in Bangladesh offering high-quality Ayurvedic, herbal, organic, and natural health products (like honey, oils, herbal powders, organic foods, and skincare items).
 
 **Your Mission as Assistant:**
 1. Assist users with questions about products, ingredients, organic health benefits, and Ayurvedic usage.
@@ -47,7 +47,7 @@ export const getChatResponse = async (
 
     const selectedKey = getRandomKey(apiKey);
     if (!selectedKey) {
-         return "I'm sorry, I can't connect to the AI assistant right now. (Server Error: Invalid Gemini API Key).";
+        return "I'm sorry, I can't connect to the AI assistant right now. (Server Error: Invalid Gemini API Key).";
     }
 
     try {
@@ -69,7 +69,7 @@ export const getChatResponse = async (
         }));
 
         // Combine context with the user's latest query
-        const userPromptWithContext = context 
+        const userPromptWithContext = context
             ? `${context}\n\nUser Question: ${message}`
             : message;
 

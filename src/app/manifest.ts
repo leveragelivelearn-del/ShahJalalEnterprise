@@ -23,7 +23,7 @@ const THEME_COLORS: Record<string, string> = {
 export default async function manifest(): Promise<MetadataRoute.Manifest> {
   const settings = await getCachedSettings();
 
-  const brandName = settings?.brandName || 'Rimon Ayurbedic';
+  const brandName = settings?.brandName || 'Shahjalal Enterprise';
   const themeName = settings?.uiTemplates?.theme?.toLowerCase() || 'default';
   const themeColor = THEME_COLORS[themeName] || THEME_COLORS.default;
 

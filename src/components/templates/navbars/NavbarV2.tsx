@@ -51,8 +51,10 @@ import { MobileMenu } from '@/components/layout/MobileMenu';
 
 const navItems = [
   { href: '/', label: 'Home' },
-  { href: '/shop', label: 'Shop' },
-  { href: '/blog', label: 'Blogs' },
+  { href: '/import-consulting', label: 'Import Sourcing' },
+  { href: '/export-consulting', label: 'Export Sourcing' },
+  { href: '/medical-tourism', label: 'Medical Tourism' },
+  { href: '/duty-calculator', label: 'Duty Calculator' },
   { href: '/contact', label: 'Contact' },
 ];
 
@@ -162,8 +164,8 @@ export default function NavbarV2() {
             />
 
             <Link href="/" className={`text-2xl md:text-3xl font-black tracking-tighter hover:scale-105 transition-all flex items-center gap-2 group ${!isHomePage || isScrolled ? 'text-foreground' : 'text-white'}`}>
-              <Image src="/logo.webp" width={40} height={40} alt="Rimon Ayurbedic Logo" className="object-contain" />
-              {settings?.brandName || 'Rimon Ayurbedic'}
+              <Image src="/logo.webp" width={40} height={40} alt="Shahjalal Enterprise Logo" className="object-contain" />
+              {settings?.brandName || 'Shahjalal Enterprise'}
             </Link>
           </div>
 
@@ -199,8 +201,8 @@ export default function NavbarV2() {
                     <Link
                       href={item.href}
                       className={`text-xs font-bold uppercase tracking-widest relative group transition-colors ${(!isHomePage || isScrolled)
-                          ? (pathname === item.href ? 'text-foreground' : 'text-foreground/70 hover:text-primary')
-                          : (pathname === item.href ? 'text-white' : 'text-white/80 hover:text-white')
+                        ? (pathname === item.href ? 'text-foreground' : 'text-foreground/70 hover:text-primary')
+                        : (pathname === item.href ? 'text-white' : 'text-white/80 hover:text-white')
                         }`}
                     >
                       {item.label}
@@ -208,11 +210,6 @@ export default function NavbarV2() {
                         } ${pathname === item.href ? 'w-full' : 'w-0 group-hover:w-full'}`} />
                     </Link>
                   </li>
-                  {index === 0 && (
-                    <li>
-                      <CategoryNav isScrolled={!isHomePage || isScrolled} />
-                    </li>
-                  )}
                 </React.Fragment>
               ))}
             </ul>

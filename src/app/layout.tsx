@@ -190,8 +190,8 @@ export async function generateMetadata(): Promise<Metadata> {
     return {
       metadataBase: new URL(baseUrl),
       title: {
-        default: settings.metaTitle || settings.brandName || "Rimon Ayurbedic",
-        template: `%s | ${settings.brandName || "Rimon Ayurbedic"}`,
+        default: settings.metaTitle || settings.brandName || "Shahjalal Enterprise",
+        template: `%s | ${settings.brandName || "Shahjalal Enterprise"}`,
       },
       description: settings.metaDescription || settings.brandName || "Your ultimate destination for quality products.",
       manifest: '/manifest.json',
@@ -203,21 +203,21 @@ export async function generateMetadata(): Promise<Metadata> {
       appleWebApp: {
         capable: true,
         statusBarStyle: 'default',
-        title: settings.brandName || "Rimon Ayurbedic",
+        title: settings.brandName || "Shahjalal Enterprise",
       },
       formatDetection: {
         telephone: false,
       },
       openGraph: {
-        title: settings.metaTitle || settings.brandName || "Rimon Ayurbedic",
+        title: settings.metaTitle || settings.brandName || "Shahjalal Enterprise",
         description: settings.metaDescription || settings.brandName || "Your ultimate destination for quality products.",
         url: baseUrl,
-        siteName: settings.brandName || "Rimon Ayurbedic",
+        siteName: settings.brandName || "Shahjalal Enterprise",
         type: 'website',
       },
       twitter: {
         card: 'summary_large_image',
-        title: settings.metaTitle || settings.brandName || "Rimon Ayurbedic",
+        title: settings.metaTitle || settings.brandName || "Shahjalal Enterprise",
         description: settings.metaDescription || settings.brandName || "Your ultimate destination for quality products.",
       },
       verification: {
@@ -234,7 +234,7 @@ export async function generateMetadata(): Promise<Metadata> {
     };
   } catch (error) {
     return {
-      title: "Rimon Ayurbedic",
+      title: "Shahjalal Enterprise",
       description: "Your ultimate destination for quality products.",
     };
   }

@@ -17,14 +17,16 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground font-sans;
   }
+
   html {
     @apply antialiased;
   }
 
-  button, 
+  button,
   [role="button"],
   a,
   select,
@@ -95,12 +97,14 @@ html.lenis {
 /* Hide scrollbar on mobile version */
 @media (max-width: 639px) {
   * {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
   }
+
   ::-webkit-scrollbar {
-    display: none; /* Chrome, Safari and Opera */
+    display: none;
+    /* Chrome, Safari and Opera */
   }
 }
-
-

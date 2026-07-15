@@ -14,30 +14,30 @@ import { useSettings } from "@/components/SettingsProvider";
 
 const fallbackReviews = [
   {
-    name: "Ariful Islam",
-    role: "Verified Buyer",
-    content: "The quality of the products is amazing. I was skeptical about ordering online, but this shop proved me wrong. Delivery was super fast too!",
+    name: "Kamal Uddin",
+    role: "MD, K.U. Garments Ltd.",
+    content: "M/S. Shah Jalal Enterprise made our import setup incredibly simple. Their consulting team guided us through LC opening and customs clearing seamlessly. Highly recommended for global sourcing!",
     image: "https://i.pravatar.cc/150?u=1",
     rating: 5
   },
   {
-    name: "Sadia Afrin",
-    role: "Regular Customer",
-    content: "Excellent customer service! They helped me choose the right size for my dress. The checkout process was smooth as silk. Highly recommended.",
+    name: "Dr. Salma Begum",
+    role: "Patient Guardian (Raffles Hospital)",
+    content: "We got our medical visa invitation letter within 48 hours thanks to their direct coordination with Raffles Hospital. The ticketing and lodging coordination was outstanding.",
     image: "https://i.pravatar.cc/150?u=2",
     rating: 5
   },
   {
-    name: "Tanvir Ahmed",
-    role: "Tech Enthusiast",
-    content: "Bought my new headphones from here. Genuine product with warranty. The packaging was very secure. Keep up the good work!",
+    name: "Tanvir Rahman",
+    role: "CEO, Nexa Logistics",
+    content: "Their customs duty calculator and cargo clearance consultation saved us from major delays at the port. They are true professionals in international trade regulations.",
     image: "https://i.pravatar.cc/150?u=3",
     rating: 5
   },
   {
-    name: "Nusrat Jahan",
-    role: "Verified Buyer",
-    content: "I love the variety of products they have. It's my one-stop shop for everything I need. The prices are very competitive compared to other local shops.",
+    name: "Mariam Sultana",
+    role: "Client (Apollo Chennai)",
+    content: "Seamless medical travel assistance! From airport pickup in Chennai to booking consultations at Apollo, they took care of everything for my mother's cardiac checkup.",
     image: "https://i.pravatar.cc/150?u=4",
     rating: 5
   }
@@ -55,10 +55,10 @@ export function Testimonials() {
         <div className="flex flex-col md:flex-row items-center md:items-end justify-between gap-8 mb-16">
           <div className="space-y-4 text-center md:text-left max-w-xl">
             <h2 className="text-2xl md:text-4xl font-black tracking-tighter">
-              What our <span className="text-primary italic">Customers</span> say
+              What our <span className="text-primary italic">Clients</span> say
             </h2>
             <p className="text-muted-foreground font-medium">
-              Don't just take our word for it. Join thousands of happy customers all over Bangladesh!
+              Don't just take our word for it. Join hundreds of businesses and patients who rely on our global consulting and medical travel logistics.
             </p>
           </div>
           <div className="flex items-center gap-2 pb-2">

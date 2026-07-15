@@ -15,7 +15,7 @@ if (fs.existsSync(envPath)) {
 }
 
 if (!mongodbUri) {
-  mongodbUri = 'mongodb+srv://RimonAyurbedic:xI2QuBaFZsYQ5vRD@cluster0.e5n1hnl.mongodb.net/RimonAyurbedic';
+  mongodbUri = 'mongodb+srv://shahjalalenterprise:xI2QuBaFZsYQ5vRD@cluster0.e5n1hnl.mongodb.net/shahjalalenterprise';
 }
 
 console.log('Connecting to MongoDB...');
@@ -40,7 +40,7 @@ const faqs = [
     isActive: true,
   },
   {
-    question: 'Do I need a prescription to buy medicines from Rimon Ayurbedic?',
+    question: 'Do I need a prescription to buy medicines from Shahjalal Enterprise?',
     answer: 'Most of our natural supplements, general wellness tonics, and herbal products do not require a prescription. However, for specialized classical Ayurvedic formulations, we suggest consulting a registered Ayurvedic practitioner.',
     order: 2,
     isActive: true,
@@ -71,7 +71,7 @@ async function seed() {
       await mongoose.connect(mongodbUri);
     } catch (connErr) {
       console.log('SRV connection failed, trying direct connection fallback...');
-      const directUri = 'mongodb://RimonAyurbedic:xI2QuBaFZsYQ5vRD@ac-jrowhop-shard-00-00.e5n1hnl.mongodb.net:27017,ac-jrowhop-shard-00-01.e5n1hnl.mongodb.net:27017,ac-jrowhop-shard-00-02.e5n1hnl.mongodb.net:27017/RimonAyurbedic?ssl=true&authSource=admin';
+      const directUri = 'mongodb://shahjalalenterprise:xI2QuBaFZsYQ5vRD@ac-jrowhop-shard-00-00.e5n1hnl.mongodb.net:27017,ac-jrowhop-shard-00-01.e5n1hnl.mongodb.net:27017,ac-jrowhop-shard-00-02.e5n1hnl.mongodb.net:27017/shahjalalenterprise?ssl=true&authSource=admin';
       await mongoose.connect(directUri);
     }
     console.log('Connected to MongoDB successfully.');
@@ -84,7 +84,7 @@ async function seed() {
     const insertResult = await FAQ.insertMany(faqs);
     console.log(`Seeded ${insertResult.length} FAQs successfully:`);
     insertResult.forEach((f, i) => {
-      console.log(`[FAQ ${i+1}] Question: "${f.question}"`);
+      console.log(`[FAQ ${i + 1}] Question: "${f.question}"`);
     });
 
   } catch (error) {

@@ -5,7 +5,7 @@ import { BlogListingSelector } from '@/components/templates/ServerRegistry';
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getCachedSettings();
-  const brandName = settings?.brandName || 'Rimon Ayurbedic';
+  const brandName = settings?.brandName || 'Shahjalal Enterprise';
   const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
   const headersList = await headers();
   const hostname = headersList.get('host') || 'localhost';
@@ -35,18 +35,18 @@ export default async function BlogListingPage({
   searchParams: Promise<{ page?: string; q?: string }>;
 }) {
   const { page = '1', q = '' } = await searchParams;
-  
+
   // Safe page parsing and clamping
   const parsedPage = parseInt(page, 10);
   const currentPage = isNaN(parsedPage) ? 1 : Math.max(1, parsedPage);
-  
+
   const limit = 12;
 
   // Fetch settings
   const settings = await getCachedSettings();
-  
+
   // Fetch blogs based on a reasonable high limit for listing
-  const allBlogs = await getCachedBlogs(500); 
+  const allBlogs = await getCachedBlogs(500);
 
   const filteredBlogs = allBlogs.filter((blog: any) => {
     const searchTerm = q.toLowerCase().trim();
@@ -60,12 +60,12 @@ export default async function BlogListingPage({
   const totalBlogs = filteredBlogs.length;
   const totalPages = Math.ceil(totalBlogs / limit);
   const safeCurrentPage = Math.min(currentPage, totalPages || 1);
-  
+
   const startIndex = (safeCurrentPage - 1) * limit;
   const paginatedBlogs = filteredBlogs.slice(startIndex, startIndex + limit);
 
   return (
-    <BlogListingSelector 
+    <BlogListingSelector
       variant={settings?.uiTemplates?.blogListing || 'v1'}
       blogs={paginatedBlogs}
       totalBlogs={totalBlogs}
