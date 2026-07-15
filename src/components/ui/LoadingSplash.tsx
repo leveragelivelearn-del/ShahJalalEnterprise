@@ -49,44 +49,17 @@ export default function LoadingSplash({
             damping: 20,
             duration: 1,
           }}
-          className="relative w-20 h-20 rounded-2xl flex items-center justify-center shadow-lg bg-white"
+          className="relative w-24 h-24 rounded-full flex items-center justify-center shadow-lg bg-white overflow-hidden p-1"
         >
-          {/* Healthcare Cross Symbol */}
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.3, type: "spring", stiffness: 300 }}
-            className="relative w-10 h-10"
-          >
-            <motion.div
-              className="absolute bg-primary rounded-sm"
-              initial={{ width: 0 }}
-              animate={{ width: "24px" }}
-              transition={{ delay: 0.5, duration: 0.3 }}
-              style={{
-                height: "6px",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-              }}
-            />
-            <motion.div
-              className="absolute bg-primary rounded-sm"
-              initial={{ height: 0 }}
-              animate={{ height: "24px" }}
-              transition={{ delay: 0.7, duration: 0.3 }}
-              style={{
-                width: "6px",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-              }}
-            />
-          </motion.div>
+          <img 
+            src={logoUrl || "/logo.webp"} 
+            alt={activeBrandName} 
+            className="w-full h-full object-contain rounded-full"
+          />
 
           {/* Pulsing Glow Effect */}
           <motion.div
-            className="absolute inset-0 rounded-2xl border border-white/40"
+            className="absolute inset-0 rounded-full border border-white/40 pointer-events-none"
             initial={{ opacity: 0.5 }}
             animate={{ opacity: [0.5, 1, 0.5] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
