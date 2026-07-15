@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 
 const cards = [
   {
@@ -38,10 +39,12 @@ export function TafFeatureCards() {
               {/* Image Circle Area */}
               <div className="absolute top-0 left-0 w-full h-[65%] flex items-center justify-center p-6 bg-background rounded-b-[2.5rem] transition-colors duration-300">
                 <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-primary/10 shadow-inner">
-                  <img
+                  <Image
                     src={card.image}
                     alt={card.title}
-                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 rounded-full"
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    className="object-cover object-center group-hover:scale-105 transition-transform duration-500 rounded-full"
                   />
                 </div>
               </div>

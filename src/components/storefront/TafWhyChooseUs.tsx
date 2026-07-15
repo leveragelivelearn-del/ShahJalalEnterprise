@@ -2,7 +2,8 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Star, ShieldCheck, HeartPulse, Sparkles, MessageCircle, Plus, PhoneCall } from 'lucide-react';
+import Image from 'next/image';
+import { ShieldCheck, HeartPulse, Sparkles, MessageCircle, Plus, PhoneCall } from 'lucide-react';
 
 const reasons = [
   {
@@ -76,10 +77,13 @@ export function TafWhyChooseUs() {
             <div className="flex flex-col gap-4 h-full">
               {/* Main consultant/medical image — tall */}
               <div className="relative flex-1 rounded-2xl overflow-hidden">
-                <img
+                <Image
                   src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&auto=format&fit=crop&q=80"
                   alt="Senior consultant team"
-                  className="w-full h-full object-cover absolute inset-0"
+                  fill
+                  sizes="(max-width: 1024px) 50vw, 25vw"
+                  className="object-cover"
+                  priority
                 />
                 {/* Got questions overlay */}
                 <div className="absolute bottom-4 left-3 right-3 z-10">
@@ -113,9 +117,15 @@ export function TafWhyChooseUs() {
                   {avatars.map((src, i) => (
                     <div
                       key={i}
-                      className="h-8 w-8 rounded-full border-2 border-primary overflow-hidden -ml-2 first:ml-0 shadow"
+                      className="relative h-8 w-8 rounded-full border-2 border-primary overflow-hidden -ml-2 first:ml-0 shadow"
                     >
-                      <img src={src} alt={`Client ${i + 1}`} className="w-full h-full object-cover" />
+                      <Image 
+                        src={src} 
+                        alt={`Client ${i + 1}`} 
+                        fill 
+                        sizes="32px" 
+                        className="object-cover" 
+                      />
                     </div>
                   ))}
                   <div className="h-8 w-8 rounded-full border-2 border-primary bg-primary-foreground/20 flex items-center justify-center -ml-2">
@@ -150,10 +160,12 @@ export function TafWhyChooseUs() {
 
               {/* Trade image — fills remaining space */}
               <div className="relative flex-1 rounded-2xl overflow-hidden">
-                <img
+                <Image
                   src="https://images.unsplash.com/photo-1516549655169-df83a0774514?w=400&auto=format&fit=crop&q=80"
                   alt="Medical logistics consulting"
-                  className="w-full h-full object-cover absolute inset-0"
+                  fill
+                  sizes="(max-width: 1024px) 50vw, 25vw"
+                  className="object-cover"
                 />
               </div>
             </div>

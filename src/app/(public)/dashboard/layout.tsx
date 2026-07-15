@@ -1,6 +1,7 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { 
@@ -53,9 +54,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             <CardHeader className="flex flex-col items-center text-center">
               <div className="h-20 w-20 rounded-full bg-primary/10 flex items-center justify-center border-4 border-background shadow-lg mb-4 overflow-hidden relative">
                   {session?.user?.image ? (
-                     <img 
+                     <Image 
                        src={session.user.image} 
                        alt={session?.user?.name || "Profile"} 
+                       width={80}
+                       height={80}
                        className="h-full w-full object-cover" 
                        referrerPolicy="no-referrer"
                      />

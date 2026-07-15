@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, MapPin } from 'lucide-react';
 
@@ -114,9 +115,11 @@ export function OurHospitalsSection({ initialHospitals = [] }: { initialHospital
                   >
                     {/* Hospital Image */}
                     <div className="aspect-[4/3] relative w-full overflow-hidden bg-muted">
-                      <img
-                        src={hospital.image}
+                      <Image
+                        src={hospital.image || 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=400&auto=format&fit=crop&q=80'}
                         alt={hospital.name}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33.33vw, 25vw"
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       />
                       <div className="absolute top-3 right-3 bg-background/90 backdrop-blur-sm text-xs font-bold text-primary px-3 py-1 rounded-full border border-primary/20 flex items-center gap-1 shadow-sm">

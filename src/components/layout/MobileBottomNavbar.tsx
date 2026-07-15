@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import {
   Home,
@@ -65,9 +66,12 @@ export function MobileBottomNavbar() {
               <SheetTrigger asChild>
                 <button className="flex flex-col items-center justify-center gap-1 min-w-[64px] text-muted-foreground active:scale-95 transition-transform outline-none cursor-pointer">
                   <div className="h-6 w-6 rounded-full border border-primary/50 overflow-hidden">
-                    <img
+                    <Image
                       src={session.user?.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(session.user?.name || '')}`}
                       alt={session.user?.name || 'User'}
+                      width={24}
+                      height={24}
+                      unoptimized
                       className="h-full w-full object-cover"
                     />
                   </div>
@@ -80,9 +84,12 @@ export function MobileBottomNavbar() {
                   {/* Profile Header */}
                   <div className="flex items-center gap-4 border-b border-muted/50 pb-4">
                     <div className="h-14 w-14 rounded-full border-2 border-primary/50 overflow-hidden">
-                      <img
+                      <Image
                         src={session.user?.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(session.user?.name || '')}`}
                         alt={session.user?.name || 'User'}
+                        width={56}
+                        height={56}
+                        unoptimized
                         className="h-full w-full object-cover"
                       />
                     </div>

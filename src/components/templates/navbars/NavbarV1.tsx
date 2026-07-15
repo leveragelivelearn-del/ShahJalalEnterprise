@@ -1,33 +1,22 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
-  ShoppingCart,
-  Heart,
   User,
-  Search,
   Menu,
-  Mic,
-  MicOff,
   LayoutDashboard,
   LogOut,
   Settings,
   Package,
   Truck,
-  HelpCircle,
   ChevronDown
 } from 'lucide-react';
 import { useSession, signOut } from 'next-auth/react';
-import { toast } from 'sonner';
-import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { ModeToggle } from '@/components/mode-toggle';
-import { useAppSelector } from '@/store/hooks';
-import { CartDrawer } from '@/components/layout/CartDrawer';
-import { CategoryNav } from '@/components/layout/CategoryNav';
 import { AIChatbot } from '@/components/layout/AIChatbot';
 import { Logo } from '@/components/ui/logo';
 import { useSettings } from '@/components/SettingsProvider';
@@ -46,7 +35,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import Swal from 'sweetalert2';
 
 const navItems = [
   { href: '/', label: 'Home' },
@@ -77,37 +65,9 @@ const navItems = [
 export default function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [isListening, setIsListening] = useState(false);
-  const recognitionRef = useRef<any>(null);
-  const router = useRouter();
   const { data: session, status } = useSession();
-  const { totalQuantity: cartCount, totalAmount } = useAppSelector((state) => state.cart);
-  const { items: wishlistItems } = useAppSelector((state) => state.wishlist);
   const settings = useSettings();
-
-  const [categories, setCategories] = useState<any[]>([]);
   const [profile, setProfile] = useState<any>(null);
-
-
-  useEffect(() => {
-    const controller = new AbortController();
-    async function fetchCats() {
-      try {
-        const res = await fetch('/api/categories', { signal: controller.signal });
-        if (res.ok) {
-          const data = await res.json();
-          setCategories(data.filter((c: any) => c.isActive));
-        }
-      } catch (e: any) {
-        if (e.name !== 'AbortError') {
-          console.error('Failed to fetch categories');
-        }
-      }
-    }
-    fetchCats();
-    return () => controller.abort();
-  }, []);
 
   useEffect(() => {
     let isMounted = true;
@@ -137,81 +97,7 @@ export default function Navbar() {
     };
   }, [status]);
 
-  // Voice Search Cleanup
-  useEffect(() => {
-    return () => {
-      if (recognitionRef.current) {
-        try {
-          recognitionRef.current.stop();
-        } catch (e) {
-          // ignore if already stopped
-        }
-        recognitionRef.current.onstart = null;
-        recognitionRef.current.onend = null;
-        recognitionRef.current.onerror = null;
-        recognitionRef.current.onresult = null;
-        recognitionRef.current = null;
-      }
-      setIsListening(false);
-    };
-  }, []);
 
-  const mainCategories = categories.filter(c => !c.parentCategory);
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchTerm.trim()) {
-      router.push(`/shop?search=${encodeURIComponent(searchTerm.trim())}`);
-      setSearchTerm('');
-    }
-  };
-
-  const handleVoiceSearch = () => {
-    const SpeechRecognition =
-      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-
-    if (!SpeechRecognition) {
-      Swal.fire({
-        title: 'Voice Search Unsupported',
-        text: 'Voice search is not supported in your browser. Please use Google Chrome for the best experience.',
-        icon: 'info',
-        confirmButtonColor: '#00D1B2'
-      });
-      return;
-    }
-
-    if (isListening) {
-      recognitionRef.current?.stop();
-      setIsListening(false);
-      return;
-    }
-
-    const recognition = new SpeechRecognition();
-    recognition.lang = 'en-US';
-    recognition.interimResults = false;
-    recognition.maxAlternatives = 1;
-    recognitionRef.current = recognition;
-
-    recognition.onstart = () => setIsListening(true);
-    recognition.onend = () => setIsListening(false);
-    recognition.onerror = (event: any) => {
-      setIsListening(false);
-      console.error('Speech recognition error', event.error);
-      if (event.error === 'not-allowed') {
-        toast.error('Microphone access denied. Please enable it in browser settings.');
-      } else if (event.error === 'network') {
-        toast.error('Network error. Please check your connection.');
-      } else if (event.error === 'no-speech') {
-        toast.info('No speech detected. Please try again.');
-      }
-    };
-    recognition.onresult = (event: any) => {
-      const transcript = event.results[0][0].transcript;
-      router.push(`/shop?search=${encodeURIComponent(transcript.trim())}`);
-    };
-
-    recognition.start();
-  };
 
   return (
     <>
@@ -317,9 +203,12 @@ export default function Navbar() {
                         aria-label="Account menu"
                       >
                         <div className="h-8 w-8 rounded-full border-2 border-primary/20 overflow-hidden group-hover:border-primary transition-all">
-                          <img
+                          <Image
                             src={session.user?.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(session.user?.name || 'U')}`}
                             alt={session.user?.name || 'User'}
+                            width={32}
+                            height={32}
+                            unoptimized
                             className="h-full w-full object-cover"
                           />
                         </div>
@@ -367,11 +256,6 @@ export default function Navbar() {
                                 <LayoutDashboard className="mr-2 h-4 w-4" /> Admin Dashboard
                               </Link>
                             </DropdownMenuItem>
-                            <DropdownMenuItem asChild>
-                              <Link href="/admin/orders" className="cursor-pointer">
-                                <Truck className="mr-2 h-4 w-4" /> Manage Orders
-                              </Link>
-                            </DropdownMenuItem>
                           </>
                         )}
 
@@ -380,11 +264,6 @@ export default function Navbar() {
                             <DropdownMenuItem asChild>
                               <Link href="/dashboard" className="cursor-pointer">
                                 <LayoutDashboard className="mr-2 h-4 w-4" /> Dashboard
-                              </Link>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem asChild>
-                              <Link href="/track-order" className="cursor-pointer">
-                                <Truck className="mr-2 h-4 w-4" /> Track Order
                               </Link>
                             </DropdownMenuItem>
                           </>

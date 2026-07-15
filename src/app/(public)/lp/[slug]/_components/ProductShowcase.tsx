@@ -1,5 +1,6 @@
 'use client'; 
 
+import Image from 'next/image';
 import { CheckCircle2, Star } from 'lucide-react';
 
 export default function ProductShowcase({ content }: { content: any }) {
@@ -9,9 +10,11 @@ export default function ProductShowcase({ content }: { content: any }) {
         {/* Product Image */}
         <div className="relative group">
           <div className="absolute -inset-4 bg-primary/10 rounded-[3rem] blur-2xl group-hover:bg-primary/20 transition-all" />
-          <img 
+          <Image 
             src={content.image || '/assets/product-placeholder.webp'} 
             alt={content.title}
+            width={600}
+            height={600}
             className="relative w-full h-auto rounded-[2rem] shadow-2xl object-cover"
           />
           {content.price > 0 && content.salePrice && content.salePrice < content.price && (

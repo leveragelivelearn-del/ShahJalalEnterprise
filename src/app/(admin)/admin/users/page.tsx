@@ -12,12 +12,12 @@ import {
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { 
-  MoreHorizontal, 
-  Loader2, 
-  User as UserIcon, 
-  Eye, 
-  ShieldAlert, 
+import {
+  MoreHorizontal,
+  Loader2,
+  User as UserIcon,
+  Eye,
+  ShieldAlert,
   Calendar,
   Phone,
   MapPin,
@@ -60,6 +60,22 @@ interface UserData {
   totalOrders: number;
   totalSpent: number;
   lastOrderDate?: string;
+}
+
+function SafeUserAvatar({ src, alt, width, height, className }: { src: string, alt: string, width: number, height: number, className?: string }) {
+  const [error, setError] = useState(false);
+  const fallbackUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(alt)}&background=random`;
+
+  return (
+    <Image
+      src={error ? fallbackUrl : src}
+      alt={alt}
+      width={width}
+      height={height}
+      className={className}
+      onError={() => setError(true)}
+    />
+  );
 }
 
 export default function UsersPage() {
@@ -161,7 +177,7 @@ export default function UsersPage() {
       setIsAssigning(false);
     }
   };
- 
+
   const handleDeleteUser = async (userId: string, userName: string) => {
     const result = await Swal.fire({
       title: 'Delete User?',
@@ -208,7 +224,7 @@ export default function UsersPage() {
         </div>
         <div className="flex items-center gap-3">
           {isSuperAdmin && (
-            <Button 
+            <Button
               onClick={() => setIsAssignAdminOpen(true)}
               className="bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-full px-6 h-11 shadow-lg shadow-blue-200 border-none transition-all hover:scale-105 active:scale-95"
             >
@@ -257,13 +273,12 @@ export default function UsersPage() {
                   <TableCell>
                     {user.image && user.image !== '' ? (
                       <div className="relative h-10 w-10 rounded-full overflow-hidden border">
-                        <img 
-                          src={user.image} 
-                          alt={user.name} 
+                        <SafeUserAvatar
+                          src={user.image}
+                          alt={user.name}
+                          width={40}
+                          height={40}
                           className="h-full w-full object-cover"
-                          onError={(e) => {
-                            (e.target as any).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}&background=random`;
-                          }}
                         />
                       </div>
                     ) : (
@@ -273,7 +288,7 @@ export default function UsersPage() {
                     )}
                   </TableCell>
                   <TableCell>
-                    <button 
+                    <button
                       onClick={() => openUserDetails(user)}
                       className="font-semibold text-slate-900 hover:text-primary transition-colors text-left"
                     >
@@ -288,7 +303,7 @@ export default function UsersPage() {
                     </div>
                   </TableCell>
                   <TableCell>
-                    <Badge 
+                    <Badge
                       variant={user.role === 'admin' ? 'default' : 'outline'}
                       className={`
                         capitalize px-3 py-0.5 rounded-full font-bold text-[10px] tracking-wider
@@ -319,21 +334,21 @@ export default function UsersPage() {
                             <Eye className="mr-2 h-4 w-4" /> View Details
                           </DropdownMenuItem>
                         </DropdownMenuGroup>
-                        
+
                         <DropdownMenuSeparator />
-                        
+
                         <DropdownMenuGroup>
                           <DropdownMenuLabel className="text-[10px] font-black uppercase text-muted-foreground px-2 py-1.5">Management</DropdownMenuLabel>
-                          
+
                           {user.role === 'user' ? (
-                            <DropdownMenuItem 
+                            <DropdownMenuItem
                               onClick={() => handleUpdateRole(user._id, 'admin')}
                               className="cursor-pointer text-blue-600 font-bold"
                             >
                               <ShieldCheck className="mr-2 h-4 w-4" /> Make Admin
                             </DropdownMenuItem>
                           ) : (
-                            <DropdownMenuItem 
+                            <DropdownMenuItem
                               onClick={() => handleUpdateRole(user._id, 'user')}
                               className="cursor-pointer text-slate-600 font-bold"
                             >
@@ -345,7 +360,7 @@ export default function UsersPage() {
                           <DropdownMenuItem className="text-destructive cursor-pointer font-medium">
                             <ShieldAlert className="mr-2 h-4 w-4" /> Suspend User
                           </DropdownMenuItem>
-                          <DropdownMenuItem 
+                          <DropdownMenuItem
                             onClick={() => handleDeleteUser(user._id, user.name)}
                             className="text-destructive cursor-pointer font-bold bg-red-50 hover:bg-red-100 mt-1"
                           >
@@ -378,11 +393,12 @@ export default function UsersPage() {
               <div className="flex flex-col md:flex-row items-center gap-6 p-6 bg-slate-50 rounded-3xl border border-slate-100">
                 <div className="relative h-24 w-24 rounded-full overflow-hidden border-4 border-white shadow-xl flex-shrink-0 bg-primary/10 flex items-center justify-center">
                   {selectedUser.image ? (
-                    <img 
-                      src={selectedUser.image} 
-                      alt={selectedUser.name} 
+                    <SafeUserAvatar
+                      src={selectedUser.image}
+                      alt={selectedUser.name}
+                      width={96}
+                      height={96}
                       className="h-full w-full object-cover"
-                      onError={(e) => { (e.target as any).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(selectedUser.name)}&background=random`; }}
                     />
                   ) : (
                     <UserIcon className="h-10 w-10 text-primary" />
@@ -420,7 +436,7 @@ export default function UsersPage() {
                       <div>
                         <p className="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">Shipping Address</p>
                         <p className="text-sm font-bold text-slate-700 leading-snug">
-                          {selectedUser.addresses && selectedUser.addresses.length > 0 
+                          {selectedUser.addresses && selectedUser.addresses.length > 0
                             ? `${selectedUser.addresses[0].street || ''}, ${selectedUser.addresses[0].city || ''}, ${selectedUser.addresses[0].state || ''}`
                             : 'No address saved yet'}
                         </p>
@@ -444,7 +460,7 @@ export default function UsersPage() {
                       <span className="text-[10px] font-bold uppercase text-primary/60">Total Spent</span>
                     </div>
                   </div>
-                  
+
                   <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100 flex flex-col gap-2">
                     <div className="flex justify-between items-center text-xs">
                       <span className="font-bold text-slate-400">LAST VISIT</span>
@@ -479,7 +495,7 @@ export default function UsersPage() {
           <div className="bg-blue-600 p-8 text-white relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-2xl" />
             <div className="absolute bottom-0 left-0 w-24 h-24 bg-blue-400/20 rounded-full -ml-12 -mb-12 blur-xl" />
-            
+
             <DialogHeader className="relative z-10">
               <div className="h-12 w-12 bg-white/20 rounded-2xl flex items-center justify-center mb-4 backdrop-blur-sm border border-white/30">
                 <ShieldCheck className="h-6 w-6 text-white" />
@@ -509,9 +525,9 @@ export default function UsersPage() {
                 </p>
               </div>
             </div>
-            
+
             <div className="flex gap-3 pt-2">
-              <Button 
+              <Button
                 type="button"
                 variant="outline"
                 onClick={() => setIsAssignAdminOpen(false)}
@@ -519,8 +535,8 @@ export default function UsersPage() {
               >
                 CANCEL
               </Button>
-              <Button 
-                type="submit" 
+              <Button
+                type="submit"
                 disabled={isAssigning}
                 className="flex-[2] h-14 rounded-2xl font-black bg-blue-600 hover:bg-blue-700 shadow-xl shadow-blue-200 border-none group"
               >

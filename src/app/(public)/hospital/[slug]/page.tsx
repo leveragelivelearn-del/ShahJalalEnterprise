@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import connectToDatabase from '@/lib/db';
 import Hospital from '@/models/Hospital';
 import { notFound } from 'next/navigation';
@@ -28,7 +29,7 @@ export default async function HospitalProfilePage({ params }: { params: Promise<
         {/* Hospital Card Header */}
         <div className="rounded-2xl border border-border bg-card text-card-foreground p-6 md:p-8 shadow-lg flex flex-col md:flex-row gap-6 md:items-center">
           {hospital.logo ? (
-            <img src={hospital.logo} alt={hospital.name} className="w-24 h-24 object-contain shrink-0 bg-white p-2 rounded-lg border border-border" />
+            <Image src={hospital.logo} alt={hospital.name} width={96} height={96} className="w-24 h-24 object-contain shrink-0 bg-white p-2 rounded-lg border border-border" />
           ) : (
             <div className="w-24 h-24 rounded-lg bg-primary/10 text-primary flex items-center justify-center text-3xl font-bold shrink-0 border border-border">
               {hospital.name[0]}

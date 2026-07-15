@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { X, Settings2, Palette, Image as ImageIcon, Type, ShoppingBag, Plus, Trash2, Search, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -186,9 +187,11 @@ export default function SectionSettingsEditor({
                     setShowDropdown(false);
                   }}
                 >
-                  <img
+                  <Image
                     src={product.images?.[0] || '/assets/product-placeholder.webp'}
                     alt={product.name}
+                    width={32}
+                    height={32}
                     className="h-8 w-8 rounded-lg object-cover bg-gray-50 border"
                   />
                   <div className="flex-1 min-w-0">

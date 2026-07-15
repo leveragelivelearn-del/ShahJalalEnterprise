@@ -8,10 +8,8 @@ export const FooterSelector = ({ style }: { style: string }) => {
 };
 
 // --- PRODUCT DETAILS ---
-import ProductDetailsV1 from './product-details/ProductDetailsV1';
-
 export const ProductDetailsSelector = ({ style, product }: { style: string, product: any }) => {
-  return <ProductDetailsV1 product={product} />;
+  return null;
 };
 
 // --- BLOG DETAILS ---
@@ -22,14 +20,8 @@ export const BlogDetailsSelector = ({ style, blog, readingTime }: { style: strin
 };
 
 // --- SHOP LISTING ---
-const ShopV1 = dynamic(() => import('./shop-page/ShopV1'));
-
 export const ShopListingSelector = ({ style, productCardStyle, products, categories, searchParams }: { style: string, productCardStyle?: string, products: any[], categories: any[], searchParams: any }) => {
-  const activeStyle = style || 'v1';
-  switch (activeStyle) {
-    case 'v1': return <ShopV1 products={products} categories={categories} searchParams={searchParams} style={activeStyle} productCardStyle={productCardStyle} />;
-    default: return <ShopV1 products={products} categories={categories} searchParams={searchParams} style={activeStyle} productCardStyle={productCardStyle} />;
-  }
+  return null;
 };
 
 // --- BLOG LISTING ---

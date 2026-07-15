@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { Hourglass, TrendingUp, Globe2 } from 'lucide-react';
 
 const stats = [
@@ -38,9 +39,11 @@ export function ExperienceSection() {
               clipPath: 'polygon(0 0, 100% 0, 80% 100%, 0% 100%)'
             }}
           >
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&auto=format&fit=crop&q=80"
               alt="M/S. Shah Jalal Enterprise Professional Consulting Team"
+              fill
+              sizes="(max-width: 1024px) 100vw, 40vw"
               className="w-full h-full object-cover object-top"
             />
           </div>

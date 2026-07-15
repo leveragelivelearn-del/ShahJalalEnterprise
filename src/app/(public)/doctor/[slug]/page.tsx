@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import connectToDatabase from '@/lib/db';
 import Doctor from '@/models/Doctor';
 import Hospital from '@/models/Hospital';
@@ -31,7 +32,7 @@ export default async function DoctorProfilePage({ params }: { params: Promise<{ 
         {/* Profile Card Header */}
         <div className="rounded-2xl border border-border bg-card text-card-foreground p-6 md:p-8 shadow-lg flex flex-col md:flex-row gap-6 md:items-center">
           {doctor.image ? (
-            <img src={doctor.image} alt={doctor.name} className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-2 border-primary shrink-0" />
+            <Image src={doctor.image} alt={doctor.name} width={160} height={160} className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-2 border-primary shrink-0" />
           ) : (
             <div className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-primary/10 text-primary flex items-center justify-center text-5xl font-bold shrink-0 border border-border">
               {doctor.name[0]}

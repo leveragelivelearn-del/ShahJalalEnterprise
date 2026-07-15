@@ -31,6 +31,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { ImageUpload } from '@/components/ui/image-upload';
+import Image from 'next/image';
 
 const TEMPLATE_OPTIONS = ['v1', 'v2', 'v3', 'v4', 'v5', 'v6'];
 const THEME_OPTIONS = ['default', 'emerald', 'black', 'caffeine', 'claude', 'elegant', 'marvel', 'material', 'midnight', 'nature', 'perplexity', 'slack', 'summer', 'sunset', 'valorant', 'supabase', 'amber', 'catppuccin', 'clay', 'cyberpunk', 'darkmatter', 'ocean', 'quantum', 't3', 'tangerine', 'vintage', 'green', 'red', 'rose', 'orange', 'blue', 'yellow', 'violet'];
@@ -551,7 +552,7 @@ export default function SuperConfigPage() {
                   <div key={method} className="space-y-4 p-4 rounded-2xl border bg-muted/10">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <img src={`/assets/${method}logo.webp`} alt={method} className="h-6 w-6 object-contain" />
+                        <Image src={`/assets/${method}logo.webp`} alt={method} width={24} height={24} className="h-6 w-6 object-contain" />
                         <Label className="font-bold capitalize">{method}</Label>
                       </div>
                       <input 
@@ -628,7 +629,7 @@ export default function SuperConfigPage() {
                     <div className="flex items-center gap-4">
                       {settings?.manualPaymentConfig?.banglaQr?.qrCode && (
                         <div className="h-16 w-16 rounded-xl border bg-white p-1 flex items-center justify-center overflow-hidden shrink-0 shadow-sm relative group">
-                          <img src={settings.manualPaymentConfig.banglaQr.qrCode} alt="QR" className="max-h-full max-w-full object-contain" />
+                          <Image src={settings.manualPaymentConfig.banglaQr.qrCode} alt="QR" width={64} height={64} className="max-h-full max-w-full object-contain" />
                           <button 
                             onClick={() => setSettings({
                               ...settings,

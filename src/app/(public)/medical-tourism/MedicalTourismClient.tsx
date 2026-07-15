@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Search, Stethoscope, Building2, Calculator, ArrowRight, MapPin, BadgeCheck, FileText } from 'lucide-react';
@@ -289,7 +290,7 @@ export default function MedicalTourismClient({
                       <div className="p-6 space-y-4">
                         <div className="flex gap-4">
                           {doc.image ? (
-                            <img src={doc.image} alt={doc.name} className="w-16 h-16 rounded-full object-cover border border-border" />
+                            <Image src={doc.image} alt={doc.name} width={64} height={64} className="w-16 h-16 rounded-full object-cover border border-border" />
                           ) : (
                             <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary text-xl font-bold">
                               {doc.name[0]}
@@ -338,7 +339,7 @@ export default function MedicalTourismClient({
                       <div className="p-6 md:flex gap-6 justify-between items-center">
                         <div className="space-y-3 flex-1">
                           <div className="flex items-center gap-3">
-                            {hosp.logo && <img src={hosp.logo} alt={hosp.name} className="w-10 h-10 object-contain" />}
+                            {hosp.logo && <Image src={hosp.logo} alt={hosp.name} width={40} height={40} className="w-10 h-10 object-contain" />}
                             <Link href={`/hospital/${hosp.slug}`} className="hover:text-primary font-bold text-xl text-foreground font-heading">
                               {hosp.name}
                             </Link>
