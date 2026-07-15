@@ -109,21 +109,20 @@ export default function FooterV1() {
   const rawFooterNav = settings?.footerNavigation && settings.footerNavigation.length > 0
     ? settings.footerNavigation
     : [
-      { label: 'Shop All', href: '/shop' },
-      { label: 'New Arrivals', href: '/shop?filter=new' },
-      { label: 'Order Tracking', href: '/track-order' },
-      { label: 'Contact Support', href: '/contact' }
+      { label: 'Partner Hospitals', href: '/hospital' },
+      { label: 'About Us', href: '/about' },
+      { label: 'Contact Advisory', href: '/contact' }
     ];
-  const footerNav = rawFooterNav.filter((link: any) => link.label !== 'Contact Support');
+  const footerNav = rawFooterNav;
 
   return (
     <footer className="border-t bg-background pt-12 mt-10">
       <div className="container mx-auto px-4 md:px-0">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-          <div className="flex flex-col items-center text-center md:items-start md:text-left gap-4">
-            <Logo textClassName="text-xl md:text-2xl" />
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-5">
+          <div className="flex flex-col items-center text-center md:items-start md:text-left gap-4 lg:col-span-2">
+            <Logo textClassName="text-xl md:text-2xl whitespace-nowrap" />
             <p className="text-sm text-muted-foreground w-full md:w-4/5">
-              Your trusted destination for authentic Ayurvedic medicines, organic herbs, and natural wellness products.
+              Your trusted partner for global sourcing, customs clearing, trade advisory, and international medical tourism logistics.
             </p>
 
             {/* PWA Download App Button */}

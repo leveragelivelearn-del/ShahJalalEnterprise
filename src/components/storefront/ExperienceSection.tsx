@@ -5,19 +5,19 @@ import { Hourglass, TrendingUp, Globe2 } from 'lucide-react';
 
 const stats = [
   {
-    icon: <Hourglass className="w-8 h-8 text-slate-800" />,
+    icon: <Hourglass className="w-8 h-8 text-primary" />,
     title: 'Consistency',
     description: 'Podcasting operational change management inside of workflow.',
     progress: 75 // SVG circle stroke-dashoffset based on progress
   },
   {
-    icon: <TrendingUp className="w-8 h-8 text-slate-800" />,
+    icon: <TrendingUp className="w-8 h-8 text-primary" />,
     title: 'Improvement',
     description: 'Dynamically innovate customer service for state of the art systems.',
     progress: 90
   },
   {
-    icon: <Globe2 className="w-8 h-8 text-slate-800" />,
+    icon: <Globe2 className="w-8 h-8 text-primary" />,
     title: 'Branching',
     description: 'Pursue scalable customer service through sustainable global networks.',
     progress: 60
@@ -67,9 +67,9 @@ export function ExperienceSection() {
           
           {/* Section Headers */}
           <div className="space-y-4">
-            <h2 className="text-4xl md:text-5xl font-black font-heading leading-tight text-slate-900 dark:text-white">
+            <h2 className="text-4xl md:text-5xl font-black font-heading leading-tight text-foreground">
               30 Years of <br />
-              <span className="text-[#F43F5E] bg-gradient-to-r from-[#F43F5E] to-[#E11D48] bg-clip-text text-transparent">
+              <span className="text-primary">
                 Experience
               </span>
             </h2>
@@ -116,7 +116,7 @@ export function ExperienceSection() {
                         stroke="currentColor"
                         strokeWidth="4"
                         fill="transparent"
-                        className="text-[#F43F5E] transition-all duration-1000 ease-out"
+                        className="text-primary transition-all duration-1000 ease-out"
                         strokeDasharray={circumference}
                         strokeDashoffset={strokeDashoffset}
                         strokeLinecap="round"
@@ -124,14 +124,14 @@ export function ExperienceSection() {
                     </svg>
 
                     {/* Icon container */}
-                    <div className="w-14 h-14 rounded-full bg-slate-50 dark:bg-zinc-800 flex items-center justify-center shadow-inner z-10 transition-transform duration-300 group-hover:scale-105">
+                    <div className="w-14 h-14 rounded-full bg-muted flex items-center justify-center shadow-inner z-10 transition-transform duration-300 group-hover:scale-105">
                       {stat.icon}
                     </div>
                   </div>
 
                   {/* Title & Info */}
                   <div className="space-y-1">
-                    <h4 className="text-md font-bold text-slate-800 dark:text-zinc-200">
+                    <h4 className="text-md font-bold text-foreground">
                       {stat.title}
                     </h4>
                     <p className="text-[11px] text-muted-foreground leading-relaxed max-w-[180px] mx-auto h-12 overflow-hidden line-clamp-3">

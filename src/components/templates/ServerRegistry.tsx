@@ -2,20 +2,9 @@ import dynamic from 'next/dynamic';
 
 // --- FOOTERS ---
 import FooterV1 from './footers/FooterV1';
-import FooterV2 from './footers/FooterV2';
-import FooterV3 from './footers/FooterV3';
-import FooterV4 from './footers/FooterV4';
-import FooterV5 from './footers/FooterV5';
 
 export const FooterSelector = ({ style }: { style: string }) => {
-  switch (style) {
-    case 'v1': return <FooterV1 />;
-    case 'v2': return <FooterV2 />;
-    case 'v3': return <FooterV3 />;
-    case 'v4': return <FooterV4 />;
-    case 'v5': return <FooterV5 />;
-    default: return <FooterV1 />;
-  }
+  return <FooterV1 />;
 };
 
 // --- PRODUCT DETAILS ---

@@ -36,7 +36,7 @@ export function TafPrecisionSteps() {
   return (
     <section className="py-20 bg-muted/10 border-t border-b border-border">
       <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-        
+
         {/* Left Side Header and Info */}
         <div className="lg:col-span-5 space-y-6">
           <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold uppercase">
@@ -50,7 +50,7 @@ export function TafPrecisionSteps() {
           </p>
           <div className="pt-2">
             <Link href="/contact">
-              <button className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-bold text-sm px-6 py-3.5 rounded-xl hover:shadow-lg hover:shadow-primary/20 hover:-translate-y-0.5 transition-all duration-300">
+              <button className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-bold text-sm px-6 py-3.5 rounded-[0.75rem] hover:shadow-lg hover:shadow-primary/20 hover:-translate-y-0.5 transition-all duration-300">
                 Explore Full Workflow <ArrowRight className="w-4 h-4" />
               </button>
             </Link>
@@ -60,15 +60,15 @@ export function TafPrecisionSteps() {
         {/* Right Side Vertical Stack of Steps */}
         <div className="lg:col-span-7 space-y-4">
           {steps.map((step, idx) => (
-            <div 
+            <div
               key={idx}
-              className="flex items-center gap-6 p-5 bg-card border border-border rounded-2xl shadow-sm hover:border-primary/40 hover:shadow-md transition-all duration-300 group"
+              className="flex items-center gap-6 p-5 bg-card border border-border rounded-[1rem] shadow-sm hover:border-primary/40 hover:shadow-md transition-all duration-300 group"
             >
               {/* Step Number in Primary color */}
               <span className="text-2xl font-black text-primary shrink-0">
                 {step.num}
               </span>
-              
+
               {/* Step Info */}
               <div className="space-y-1">
                 <h4 className="text-md font-bold text-foreground">

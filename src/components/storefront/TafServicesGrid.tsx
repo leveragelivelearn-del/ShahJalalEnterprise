@@ -35,7 +35,7 @@ export function TafServicesGrid() {
   return (
     <section className="py-20 bg-background border-b border-border">
       <div className="max-w-7xl mx-auto px-4 md:px-8 space-y-16">
-        
+
         {/* Header Block */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div className="space-y-4">
@@ -56,12 +56,12 @@ export function TafServicesGrid() {
         {/* 4 Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((svc) => (
-            <div 
+            <div
               key={svc.num}
-              className="group relative overflow-hidden rounded-3xl bg-muted/40 border border-border min-h-[300px] p-8 flex flex-col justify-between transition-colors duration-300"
+              className="group relative overflow-hidden rounded-[2rem] bg-muted/40 border border-border min-h-[300px] p-8 flex flex-col justify-between transition-colors duration-300"
             >
               {/* Bottom-to-top fill on hover */}
-              <div className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out rounded-3xl" />
+              <div className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out rounded-[2rem]" />
 
               {/* Top Content */}
               <div className="relative z-10 space-y-4">
@@ -78,7 +78,7 @@ export function TafServicesGrid() {
                 <p className="text-sm leading-relaxed text-muted-foreground group-hover:text-primary-foreground/85 group-hover:font-medium transition-colors duration-300">
                   {svc.description}
                 </p>
-                <Link 
+                <Link
                   href={svc.link}
                   className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-primary group-hover:text-primary-foreground transition-colors duration-300"
                 >
