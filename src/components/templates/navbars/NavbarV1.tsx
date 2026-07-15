@@ -223,31 +223,8 @@ export default function Navbar() {
           {/* Middle Main Row: Search | Logo | Icons */}
           <div className="flex h-14 md:h-20 items-center justify-between px-1 md:px-6 border-b border-muted/30">
 
-            {/* Desktop Search (Left) */}
-            <div className="hidden md:flex flex-1 items-center max-w-[280px]">
-              <form onSubmit={handleSearch} className="relative w-full group">
-                <label htmlFor="navbar-search" className="sr-only">Search products</label>
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground transition-colors group-focus-within:text-primary" />
-                <input
-                  id="navbar-search"
-                  type="text"
-                  placeholder={isListening ? 'Listening...' : 'Search...'}
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  aria-label="Search products"
-                  className="w-full bg-muted/40 border-none rounded-full py-2.5 pl-10 pr-10 text-xs focus:ring-1 focus:ring-primary/20 transition-all outline-none"
-                />
-                <button
-                  type="button"
-                  onClick={handleVoiceSearch}
-                  title={isListening ? 'Stop listening' : 'Search by voice'}
-                  aria-label={isListening ? 'Stop listening' : 'Search by voice'}
-                  className={`absolute right-3 top-1/2 -translate-y-1/2 transition-colors ${isListening ? 'text-red-500 animate-pulse' : 'text-muted-foreground hover:text-primary'}`}
-                >
-                  {isListening ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
-                </button>
-              </form>
-            </div>
+            {/* Desktop Search Placeholder Spacer */}
+            <div className="hidden md:flex flex-1 max-w-[280px]"></div>
 
             {/* Mobile Menu Trigger */}
             <div className="flex md:hidden items-center">

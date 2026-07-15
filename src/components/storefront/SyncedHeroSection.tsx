@@ -72,15 +72,15 @@ export function SyncedHeroSection() {
   const currentSlide = slides[currentIndex];
 
   return (
-    <section className="relative py-8 md:py-12 px-4 md:px-8 border-b border-border bg-gradient-to-br from-primary/5 via-transparent to-primary/5 overflow-hidden">
+    <section className="relative pt-0 pb-8 md:py-12 px-0 md:px-8 border-b border-border bg-gradient-to-br from-primary/5 via-transparent to-primary/5 overflow-hidden">
       {/* Subtle decorative background glow */}
       <div className="absolute top-1/4 -right-20 w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 -left-20 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center relative z-10">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-8 items-center relative z-10">
         
         {/* Left Content Column with Framer Motion for Synced Transitions */}
-        <div className="space-y-8 text-left max-w-2xl min-h-[380px] flex flex-col justify-center">
+        <div className="order-2 lg:order-1 px-4 md:px-0 space-y-8 text-left max-w-2xl min-h-[380px] flex flex-col justify-center">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex}
@@ -127,12 +127,12 @@ export function SyncedHeroSection() {
         </div>
 
         {/* Right Image Column with Synced Ken Burns and Slide Transitions */}
-        <div className="relative w-full max-w-lg lg:max-w-none mx-auto group">
+        <div className="order-1 lg:order-2 relative w-full max-w-none md:max-w-lg lg:max-w-none mx-auto group">
           {/* Ambient shadow/glow back of the image */}
-          <div className="absolute -inset-1 bg-gradient-to-r from-primary to-primary/30 rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition duration-1000 group-hover:duration-200" />
+          <div className="hidden md:block absolute -inset-1 bg-gradient-to-r from-primary to-primary/30 rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition duration-1000 group-hover:duration-200" />
           
-          <div className="relative bg-card border border-border p-3 rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1">
-            <div className="aspect-video relative rounded-xl overflow-hidden bg-muted">
+          <div className="relative bg-transparent md:bg-card border-0 md:border p-0 md:p-3 rounded-none md:rounded-2xl shadow-none md:shadow-2xl overflow-hidden transform transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1">
+            <div className="aspect-video relative rounded-none md:rounded-xl overflow-hidden bg-muted">
               <AnimatePresence mode="popLayout">
                 {slides.map((slide, index) => {
                   const isActive = index === currentIndex;

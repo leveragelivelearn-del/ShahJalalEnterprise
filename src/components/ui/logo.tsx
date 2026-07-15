@@ -24,12 +24,12 @@ export function Logo({ className, imageClassName, textClassName, showText = true
 
   return (
     <Link href="/" className={cn("flex items-center gap-1.5 group", className)} onClick={onClick}>
-      <div className={cn("relative flex items-center justify-center overflow-hidden rounded-full transition-transform group-hover:scale-110 size-6 md:size-8 shrink-0 border border-border/10", imageClassName)}>
+      <div className={cn("relative flex items-center justify-center overflow-hidden rounded-full transition-transform group-hover:scale-110 size-6 md:size-12 shrink-0 border border-border/10", imageClassName)}>
         <Image
           src={finalLogoUrl}
           alt={`${finalBrandName} Logo`}
           fill
-          sizes={sizes || "(max-width: 768px) 24px, 32px"}
+          sizes={sizes || "(max-width: 768px) 24px, 48px"}
           className="object-cover rounded-full"
           quality={80}
           priority
