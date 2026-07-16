@@ -5,9 +5,9 @@ import Image from 'next/image';
 
 const cards = [
   {
-    title: "Chairman's Message",
+    title: "Founder & CEO's Message",
     description: "We believe that success is built on absolute trust, innovation, and an unwavering commitment to client success.",
-    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&auto=format&fit=crop&q=80"
+    image: "/assets/ceo.webp"
   },
   {
     title: "Excellence in Trade Setup",
@@ -32,7 +32,7 @@ export function TafFeatureCards() {
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {cards.map((card, idx) => (
-            <div 
+            <div
               key={idx}
               className="relative flex flex-col justify-end overflow-hidden rounded-[2.5rem] bg-primary text-primary-foreground min-h-[460px] shadow-lg group hover:shadow-xl transition-all duration-300 border border-primary/20"
             >
@@ -44,7 +44,7 @@ export function TafFeatureCards() {
                     alt={card.title}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                    className="object-cover object-center group-hover:scale-105 transition-transform duration-500 rounded-full"
+                    className="object-cover object-[center_15%] group-hover:scale-105 transition-transform duration-500 rounded-full"
                   />
                 </div>
               </div>
