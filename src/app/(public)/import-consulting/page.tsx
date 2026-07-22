@@ -1,15 +1,19 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
+import Image from 'next/image';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { FileCheck, ShieldCheck, CheckCircle2, ArrowRight, BookOpen, AlertCircle } from 'lucide-react';
+import { FileCheck, ShieldCheck, CheckCircle2, ArrowRight, BookOpen, AlertCircle, Globe, DollarSign, Info } from 'lucide-react';
 import Swal from 'sweetalert2';
+import { ImportProductsSection } from '@/components/storefront/ImportProductsSection';
 
 export default function ImportConsulting() {
   const [productCategory, setProductCategory] = useState('');
   const [paymentTerm, setPaymentTerm] = useState('');
   const [generatedChecklist, setGeneratedChecklist] = useState<string[]>([]);
+
+
 
   const handleGenerate = (e: React.FormEvent) => {
     e.preventDefault();
@@ -127,10 +131,10 @@ export default function ImportConsulting() {
         {/* Hero Section */}
         <div className="rounded-2xl bg-primary text-primary-foreground p-8 md:p-12 text-center space-y-6 shadow-xl">
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight font-heading">
-            Import Sourcing & Compliance Services
+            Product Sourcing and Development
           </h1>
-          <p className="max-w-2xl mx-auto text-lg opacity-90">
-            Navigate customs regulations, verify suppliers, optimize LC/TT payments, and calculate customs duties seamlessly.
+          <p className="max-w-2xl mx-auto text-lg opacity-90 font-medium">
+            Marketing and sales development consultancy
           </p>
           <div className="flex justify-center">
             <Button onClick={handleBookConsultation} className="bg-background text-primary hover:bg-muted font-semibold px-8 py-6 rounded-lg text-md shadow-lg">
@@ -138,6 +142,9 @@ export default function ImportConsulting() {
             </Button>
           </div>
         </div>
+
+        {/* Featured Global Import Products Showcase Section */}
+        <ImportProductsSection />
 
         {/* Core Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

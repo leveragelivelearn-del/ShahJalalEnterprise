@@ -22,11 +22,11 @@ interface SlideData {
 
 const slides: SlideData[] = [
   {
-    badgeText: 'Global Sourcing & Import-Export',
+    badgeText: 'Global Trade & Sourcing',
     badgeIcon: <Globe className="w-4 h-4" />,
-    title: 'Exclusive Sourcing & ',
-    highlightedTitle: 'Logistics Solutions',
-    description: 'Advisory on import setup, L/C payment negotiations, supplier verification, and customs clearance coordinates in Bangladesh.',
+    title: 'An Exclusive ',
+    highlightedTitle: 'Import Trade Partner',
+    description: 'Premier international trade consultancy specializing in customs clearing, LC advisory, global product sourcing, and shipping logistics.',
     primaryBtnText: 'Explore Import Services',
     primaryBtnLink: '/import-consulting',
     secondaryBtnText: 'Customs Duty Calculator',
@@ -34,11 +34,11 @@ const slides: SlideData[] = [
     image: '/assets/images/Banner/Sourcing, Custom Clearing, Cargo & Freight Logistics.webp'
   },
   {
-    badgeText: 'International Healthcare Logistics',
+    badgeText: 'International Healthcare',
     badgeIcon: <Stethoscope className="w-4 h-4" />,
     title: 'Seamless Medical Tourism & ',
     highlightedTitle: 'Consultation',
-    description: 'Connect with specialist doctors and premium partner hospitals in India, Thailand, and Singapore. Comprehensive visa, flight, and lodging coordination.',
+    description: 'Connect with specialist doctors and top partner hospitals across India, Singapore, Thailand, and Malaysia. Complete visa, flight, and lodging assistance.',
     primaryBtnText: 'Search Doctors & Hospitals',
     primaryBtnLink: '/medical-tourism',
     secondaryBtnText: 'Contact Us',
@@ -46,11 +46,11 @@ const slides: SlideData[] = [
     image: '/assets/images/Banner/Cross-Border Healthcare, Specialist Doctors, International Hospitals..webp'
   },
   {
-    badgeText: 'Premium Business Advisory',
+    badgeText: 'Export & Business Growth',
     badgeIcon: <Briefcase className="w-4 h-4" />,
     title: 'Start Your Export & ',
     highlightedTitle: 'Advisory Ventures',
-    description: 'Specialized advice on global market requirements, regulatory paperwork, and buyer sourcing networks to start your export business successfully.',
+    description: 'Comprehensive export consulting for documentation, international buyer sourcing, BGMEA UD approvals, phytosanitary NOC, and global market expansion.',
     primaryBtnText: 'Explore Export Services',
     primaryBtnLink: '/export-consulting',
     secondaryBtnText: 'Request a Proposal',
@@ -90,12 +90,6 @@ export function SyncedHeroSection() {
               transition={{ duration: 0.6, ease: 'easeInOut' }}
               className="space-y-6"
             >
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-semibold">
-                {currentSlide.badgeIcon}
-                <span>{currentSlide.badgeText}</span>
-              </div>
-
               {/* Title */}
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-foreground font-heading leading-tight">
                 {currentSlide.title}

@@ -39,22 +39,17 @@ import {
 const navItems = [
   { href: '/', label: 'Home' },
   {
-    label: 'Our Services',
-    dropdown: [
-      {
-        category: 'Business Consultations',
-        items: [
-          { href: '/export-consulting', label: 'Export' },
-          { href: '/import-consulting', label: 'Import' }
-        ]
-      },
-      {
-        category: 'Medical Consultations',
-        items: [
-          { href: '/medical-tourism', label: 'Medical Tourism' },
-          { href: '/medical-products', label: 'Medical Products' }
-        ]
-      }
+    label: 'Business Consultations',
+    items: [
+      { href: '/export-consulting', label: 'Export' },
+      { href: '/import-consulting', label: 'Import' }
+    ]
+  },
+  {
+    label: 'Medical Consultations',
+    items: [
+      { href: '/medical-tourism', label: 'Medical Tourism' },
+      { href: '/medical-products', label: 'Medical Products' }
     ]
   },
   { href: '/duty-calculator', label: 'Duty Calculator' },
@@ -124,30 +119,23 @@ export default function Navbar() {
                     <Logo onClick={() => setOpen(false)} />
                     <div className="space-y-4 pt-6 border-t font-medium tracking-tight">
                       {navItems.map((item, index) => {
-                        if (item.dropdown) {
+                        if (item.items) {
                           return (
-                            <Accordion key={index} type="single" collapsible>
-                              <AccordionItem value="services" className="border-none">
+                            <Accordion key={index} type="single" collapsible className="w-full">
+                              <AccordionItem value={`item-${index}`} className="border-none">
                                 <AccordionTrigger className="py-2 hover:no-underline text-sm font-medium text-left">
                                   {item.label}
                                 </AccordionTrigger>
-                                <AccordionContent className="pt-2 pl-4 flex flex-col gap-4">
-                                  {item.dropdown.map((sub, sIdx) => (
-                                    <div key={sIdx} className="space-y-2">
-                                      <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">{sub.category}</p>
-                                      <div className="flex flex-col gap-2 pl-2 border-l border-border">
-                                        {sub.items.map((subLink, lIdx) => (
-                                          <Link
-                                            key={lIdx}
-                                            href={subLink.href}
-                                            onClick={() => setOpen(false)}
-                                            className="hover:text-primary text-xs font-semibold"
-                                          >
-                                            {subLink.label}
-                                          </Link>
-                                        ))}
-                                      </div>
-                                    </div>
+                                <AccordionContent className="pt-2 pl-4 flex flex-col gap-2 border-l border-border">
+                                  {item.items.map((subLink, lIdx) => (
+                                    <Link
+                                      key={lIdx}
+                                      href={subLink.href}
+                                      onClick={() => setOpen(false)}
+                                      className="hover:text-primary text-xs font-semibold py-1 block"
+                                    >
+                                      {subLink.label}
+                                    </Link>
                                   ))}
                                 </AccordionContent>
                               </AccordionItem>
@@ -291,40 +279,30 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* ΓöÇΓöÇ Bottom Navigation Row ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */}
+      {/* ── Bottom Navigation Row ────────────────────────────────────────────── */}
       {/* Siblings with <header> so sticky works relative to the viewport,      */}
       {/* not the parent's bounding box. Only visible on desktop (md+).         */}
       <nav className="hidden md:flex sticky top-0 z-40 w-full h-12 items-center justify-center border-b bg-background/95 backdrop-blur-sm shadow-sm">
         <div className="container mx-auto px-4 flex justify-center">
           <ul className="flex items-center gap-10">
             {navItems.map((item, index) => {
-              if (item.dropdown) {
+              if (item.items) {
                 return (
                   <li key={index} className="flex items-center">
                     <DropdownMenu>
                       <DropdownMenuTrigger className="text-[12px] font-bold uppercase tracking-[0.25em] text-foreground/70 hover:text-primary outline-none cursor-pointer flex items-center gap-1">
                         {item.label} <ChevronDown className="w-3 h-3 text-primary" />
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent className="p-4 w-64 bg-card border border-border rounded-xl shadow-xl flex flex-col gap-4">
-                        {item.dropdown.map((sub, sIdx) => (
-                          <div key={sIdx} className="space-y-2">
-                            <DropdownMenuLabel className="text-xs font-bold text-primary p-0 uppercase tracking-widest">
-                              {sub.category}
-                            </DropdownMenuLabel>
-                            <DropdownMenuSeparator className="bg-border" />
-                            <div className="flex flex-col gap-1">
-                              {sub.items.map((subLink, lIdx) => (
-                                <DropdownMenuItem key={lIdx} asChild>
-                                  <Link
-                                    href={subLink.href}
-                                    className="w-full text-left text-xs font-bold hover:bg-muted/50 p-2 rounded-lg block"
-                                  >
-                                    {subLink.label}
-                                  </Link>
-                                </DropdownMenuItem>
-                              ))}
-                            </div>
-                          </div>
+                      <DropdownMenuContent className="p-2 w-48 bg-card border border-border rounded-xl shadow-xl flex flex-col gap-1">
+                        {item.items.map((subLink, lIdx) => (
+                          <DropdownMenuItem key={lIdx} asChild>
+                            <Link
+                              href={subLink.href}
+                              className="w-full text-left text-xs font-bold hover:bg-muted/50 p-2 rounded-lg block cursor-pointer"
+                            >
+                              {subLink.label}
+                            </Link>
+                          </DropdownMenuItem>
                         ))}
                       </DropdownMenuContent>
                     </DropdownMenu>

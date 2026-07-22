@@ -17,11 +17,11 @@ export function Marquee({ marqueeText: initialText }: { marqueeText?: string }) 
         if (!res.ok) throw new Error('Failed to fetch settings');
 
         const data = await res.json();
-        setMarqueeText(data.marqueeText || 'Welcome to Shahjalal Enterprise! Free shipping on orders over ৳500.');
+        setMarqueeText(data.marqueeText || 'Welcome to Shah Jalal EnterPrise! Free shipping on orders over ৳500.');
       } catch (error: any) {
         if (error.name !== 'AbortError') {
           console.error('Error fetching marquee text:', error);
-          setMarqueeText('Welcome to Shahjalal Enterprise! Free shipping on orders over ৳500.');
+          setMarqueeText('Welcome to Shah Jalal EnterPrise! Free shipping on orders over ৳500.');
         }
       }
     }

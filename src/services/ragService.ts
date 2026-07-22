@@ -138,7 +138,7 @@ export async function retrieveRelevantContext(
     const mergedResults = allResultsGroups.flat();
 
     // 2. Format outputs into a context string for the LLM
-    let contextString = "Here is the relevant real-time data from Shahjalal Enterprise's database:\n\n";
+    let contextString = "Here is the relevant real-time data from Shah Jalal EnterPrise's database:\n\n";
 
     // Direct lookup for Lead/Application status matching phone/email
     const phoneMatch = query.match(/(?:01[3-9]\d{8})|(?:\+8801[3-9]\d{8})/);
@@ -202,7 +202,7 @@ export async function retrieveRelevantContext(
     const totalDoctorsCount = await Doctor.countDocuments({ isActive: true });
     const totalFAQsCount = await FAQ.countDocuments({ isActive: true });
 
-    contextString += `Global platform statistics of Shahjalal Enterprise:\n`;
+    contextString += `Global platform statistics of Shah Jalal EnterPrise:\n`;
     contextString += `- Total Partner International Hospitals: ${totalHospitalsCount}\n`;
     contextString += `- Total Specialist Doctors: ${totalDoctorsCount}\n`;
     contextString += `- Total FAQs: ${totalFAQsCount}\n\n`;

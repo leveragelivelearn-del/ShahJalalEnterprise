@@ -40,7 +40,7 @@ const faqs = [
     isActive: true,
   },
   {
-    question: 'Do I need a prescription to buy medicines from Shahjalal Enterprise?',
+    question: 'Do I need a prescription to buy medicines from Shah Jalal EnterPrise?',
     answer: 'Most of our natural supplements, general wellness tonics, and herbal products do not require a prescription. However, for specialized classical Ayurvedic formulations, we suggest consulting a registered Ayurvedic practitioner.',
     order: 2,
     isActive: true,

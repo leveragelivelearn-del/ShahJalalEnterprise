@@ -7,8 +7,8 @@ import { Separator } from '@/components/ui/separator';
 import { Card, CardContent } from '@/components/ui/card';
 
 export const metadata: Metadata = {
-  title: 'Contact Us | Shahjalal Enterprise',
-  description: 'Get in touch with Shahjalal Enterprise for any inquiries, support, or feedback.',
+  title: 'Contact Us | Shah Jalal EnterPrise',
+  description: 'Get in touch with Shah Jalal EnterPrise for any inquiries, support, or feedback.',
 };
 
 async function getSettings() {
@@ -17,7 +17,7 @@ async function getSettings() {
     const settings = await GlobalSettings.findOne().lean();
     if (!settings) {
       return {
-        brandName: "Shahjalal Enterprise",
+        brandName: "Shah Jalal EnterPrise",
         contact: {
           email: "support@rimonherbal.com",
           phone: "+8801234567890",
@@ -145,7 +145,7 @@ export default async function ContactPage() {
                 </p>
                 <div className="aspect-video w-full rounded-2xl overflow-hidden shadow-md border bg-muted">
                   <iframe
-                    title="Shahjalal Enterprise Location"
+                    title="Shah Jalal EnterPrise Location"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}

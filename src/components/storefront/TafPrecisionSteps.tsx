@@ -1,38 +1,70 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Settings } from 'lucide-react';
+import { ArrowRight, Settings, Globe, Stethoscope } from 'lucide-react';
 
-const steps = [
+const tradeSteps = [
   {
     num: "01",
-    title: "Free Project Feasibility Assessment",
-    description: "Our senior consultants review your trade goals or medical files to confirm route options and budgets."
+    title: "Free Commercial Sourcing & Tariff Feasibility",
+    description: "Senior trade advisors analyze product HS Codes, duty structures, and target market feasibility."
   },
   {
     num: "02",
-    title: "Fast LC & Bank Documentation Opening",
-    description: "Preparing compliance paperwork, financial applications, and verifying legal requirements."
+    title: "Fast L/C & Commercial Bank Paperwork Opening",
+    description: "Preparing Letter of Credit applications, Proforma Invoice reviews, and outward bank clearance."
   },
   {
     num: "03",
-    title: "Real-time Customs & Port Coordination",
-    description: "Direct handling of clearing procedures and freight status reporting at target terminals."
+    title: "Real-time Customs & Port C&F Clearing",
+    description: "Direct handling of customs documentation, Bill of Entry, and cargo release at sea/air ports."
   },
   {
     num: "04",
-    title: "Quality Assurance & Inspection Coordination",
-    description: "Inspecting sourcing orders or matching hospital schedules to secure precise requirements."
+    title: "Factory Quality Control & PSI Inspection",
+    description: "Conducting pre-shipment inspections and verifying product quality standards before container dispatch."
   },
   {
     num: "05",
-    title: "Hygienic & Secure Door-to-Door Delivery Logistics",
-    description: "Safely routing the cleared commercial cargo or managing client lodging transitions."
+    title: "Safe Door-to-Door Container Logistics",
+    description: "Coordinating port transport, inland trucking, and final commercial warehouse delivery."
+  }
+];
+
+const medicalSteps = [
+  {
+    num: "01",
+    title: "Medical Report & Specialist Evaluation",
+    description: "Reviewing patient diagnosis reports with senior doctors to match suitable hospitals and cost estimates."
+  },
+  {
+    num: "02",
+    title: "Fast-Track Medical Visa (NOC) Issuance",
+    description: "Issuing official hospital visa invitation letters from partner institutions in India, Singapore, and Thailand."
+  },
+  {
+    num: "03",
+    title: "Doctor Appointment & Bed Reservation",
+    description: "Securing priority doctor serial tokens and reserving specialized hospital suites before travel."
+  },
+  {
+    num: "04",
+    title: "Airport Receive & Bengali Interpreter",
+    description: "Free airport pick-up at destination airport with assigned Bengali medical coordinator assistance."
+  },
+  {
+    num: "05",
+    title: "Admission, Lodging & Recovery Support",
+    description: "Guiding hospital admission, pre-booking nearby Halal food hotels, and facilitating post-treatment follow-ups."
   }
 ];
 
 export function TafPrecisionSteps() {
+  const [division, setDivision] = useState<'trade' | 'medical'>('trade');
+
+  const currentSteps = division === 'trade' ? tradeSteps : medicalSteps;
+
   return (
     <section className="py-20 bg-muted/10 border-t border-b border-border">
       <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
@@ -40,31 +72,52 @@ export function TafPrecisionSteps() {
         {/* Left Side Header and Info */}
         <div className="lg:col-span-5 space-y-6">
           <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold uppercase">
-            <Settings className="w-3.5 h-3.5 animate-spin" /> Consultancy Workflow
+            <Settings className="w-3.5 h-3.5 animate-spin" /> Precision Division Workflow
           </span>
           <h2 className="text-4xl md:text-5xl font-black font-heading leading-tight text-foreground">
             From Assessment to Handover — <span className="text-primary">5 Precision Steps</span>
           </h2>
           <p className="text-muted-foreground text-sm leading-relaxed">
-            Our state-of-the-art service workflow ensures that every consulting project or medical travel logistics setup reaches completion under rigorous standards, expert checkups, and absolute safety.
+            Our specialized workflows ensure that every commercial trade project or patient medical journey reaches completion under rigorous standards and absolute safety.
           </p>
-          <div className="pt-2">
-            <Link href="/contact">
-              <button className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-bold text-sm px-6 py-3.5 rounded-[0.75rem] hover:shadow-lg hover:shadow-primary/20 hover:-translate-y-0.5 transition-all duration-300">
-                Explore Full Workflow <ArrowRight className="w-4 h-4" />
-              </button>
-            </Link>
+
+          {/* Division Tabs */}
+          <div className="flex items-center justify-between gap-1.5 pt-2 w-full max-w-md bg-muted p-1 rounded-xl border border-border">
+            <button
+              onClick={() => setDivision('trade')}
+              className={`flex-1 flex items-center justify-center gap-1.5 px-2 sm:px-4 py-2 rounded-lg font-bold text-[11px] sm:text-xs whitespace-nowrap transition-all duration-300 ${
+                division === 'trade'
+                  ? 'bg-primary text-primary-foreground shadow-md'
+                  : 'text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              <Globe className="w-3.5 h-3.5 shrink-0" />
+              <span>Trade &amp; Sourcing<span className="hidden sm:inline"> Workflow</span></span>
+            </button>
+            <button
+              onClick={() => setDivision('medical')}
+              className={`flex-1 flex items-center justify-center gap-1.5 px-2 sm:px-4 py-2 rounded-lg font-bold text-[11px] sm:text-xs whitespace-nowrap transition-all duration-300 ${
+                division === 'medical'
+                  ? 'bg-primary text-primary-foreground shadow-md'
+                  : 'text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              <Stethoscope className="w-3.5 h-3.5 shrink-0" />
+              <span>Medical Tourism<span className="hidden sm:inline"> Workflow</span></span>
+            </button>
           </div>
+
+
         </div>
 
         {/* Right Side Vertical Stack of Steps */}
         <div className="lg:col-span-7 space-y-4">
-          {steps.map((step, idx) => (
+          {currentSteps.map((step, idx) => (
             <div
               key={idx}
               className="flex items-center gap-6 p-5 bg-card border border-border rounded-[1rem] shadow-sm hover:border-primary/40 hover:shadow-md transition-all duration-300 group"
             >
-              {/* Step Number in Primary color */}
+              {/* Step Number */}
               <span className="text-2xl font-black text-primary shrink-0">
                 {step.num}
               </span>

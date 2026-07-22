@@ -5,8 +5,8 @@ import { Separator } from '@/components/ui/separator';
 import { FileText, ShoppingBag, Truck, UserCheck, Scale, HelpCircle } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Terms & Conditions | Shahjalal Enterprise',
-  description: 'Understand the terms and conditions for shopping at Shahjalal Enterprise.',
+  title: 'Terms & Conditions | Shah Jalal EnterPrise',
+  description: 'Understand the terms and conditions for shopping at Shah Jalal EnterPrise.',
 };
 
 async function getSettings() {
@@ -15,7 +15,7 @@ async function getSettings() {
     const settings = await GlobalSettings.findOne().lean();
     if (!settings) {
       return {
-        brandName: "Shahjalal Enterprise",
+        brandName: "Shah Jalal EnterPrise",
         contact: {
           email: "support@rimonherbal.com",
           phone: "+8801234567890"
@@ -26,7 +26,7 @@ async function getSettings() {
   } catch (error) {
     console.error('Error fetching settings for terms page:', error);
     return {
-      brandName: "Shahjalal Enterprise",
+      brandName: "Shah Jalal EnterPrise",
       contact: {
         email: "support@rimonherbal.com",
         phone: "+8801234567890"

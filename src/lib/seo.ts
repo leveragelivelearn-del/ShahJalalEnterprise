@@ -12,7 +12,7 @@ export async function generateOrganizationSchema(settings: any) {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: settings.brandName || 'Shahjalal Enterprise',
+    name: settings.brandName || 'Shah Jalal EnterPrise',
     url: baseUrl,
     logo: settings.logo,
     contactPoint: {
@@ -41,7 +41,7 @@ export async function generateProductSchema(product: any) {
     sku: product.sku,
     brand: {
       '@type': 'Brand',
-      name: 'Shahjalal Enterprise',
+      name: 'Shah Jalal EnterPrise',
     },
     offers: {
       '@type': 'Offer',
@@ -78,7 +78,7 @@ export async function generateBlogSchema(blog: any) {
     dateModified: blog.updatedAt || blog.createdAt,
     author: {
       '@type': 'Organization',
-      name: 'Shahjalal Enterprise',
+      name: 'Shah Jalal EnterPrise',
     },
     description: blog.metaDescription || blog.title,
     url: `${baseUrl}/blog/${blog.slug}`,

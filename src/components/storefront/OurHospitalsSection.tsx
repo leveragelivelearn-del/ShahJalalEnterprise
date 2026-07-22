@@ -23,7 +23,7 @@ const fallbackHospitals: HospitalData[] = [
     description: 'Apollo Hospitals Chennai is a leading healthcare facility in India, offering world-class multi-specialty treatments.',
     country: 'India',
     city: 'Chennai',
-    image: 'https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?w=600&auto=format&fit=crop&q=80'
+    image: '/assets/images/hospitals/apollo_hospital_chennai.webp'
   },
   {
     name: 'Farrer Park Hospital',
@@ -31,7 +31,7 @@ const fallbackHospitals: HospitalData[] = [
     description: 'Farrer Park Hospital in Singapore is a modern tertiary healthcare facility designed for clinical care and teaching.',
     country: 'Singapore',
     city: 'Singapore',
-    image: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&auto=format&fit=crop&q=80'
+    image: '/assets/images/hospitals/farrer_park_hospital_singapore.webp'
   },
   {
     name: 'Raffles Hospital',
@@ -39,7 +39,7 @@ const fallbackHospitals: HospitalData[] = [
     description: 'Raffles Hospital is a flagship medical facility in Singapore providing high-quality specialist tertiary care.',
     country: 'Singapore',
     city: 'Singapore',
-    image: 'https://images.unsplash.com/photo-1586773860418-d3b97998c637?w=600&auto=format&fit=crop&q=80'
+    image: '/assets/images/hospitals/raffles_hospital_singapore.webp'
   },
   {
     name: 'Bangkok Hospital',
@@ -47,22 +47,31 @@ const fallbackHospitals: HospitalData[] = [
     description: 'Bangkok Hospital is one of the most advanced healthcare centers in Thailand offering multi-specialty medical services.',
     country: 'Thailand',
     city: 'Bangkok',
-    image: 'https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?w=600&auto=format&fit=crop&q=80'
+    image: '/assets/images/hospitals/bangkok_hospital_thailand.webp'
   }
 ];
+
+const getHospitalLocalImage = (hospital: HospitalData) => {
+  const slug = (hospital.slug || hospital.name).toLowerCase();
+  if (slug.includes('apollo')) return '/assets/images/hospitals/apollo_hospital_chennai.webp';
+  if (slug.includes('farrer')) return '/assets/images/hospitals/farrer_park_hospital_singapore.webp';
+  if (slug.includes('raffles')) return '/assets/images/hospitals/raffles_hospital_singapore.webp';
+  if (slug.includes('bangkok')) return '/assets/images/hospitals/bangkok_hospital_thailand.webp';
+  return hospital.image && !hospital.image.includes('unsplash.com') 
+    ? hospital.image 
+    : '/assets/images/hospitals/apollo_hospital_chennai.webp';
+};
 
 const countries = ['All', 'Bangladesh', 'India', 'Malaysia', 'Singapore', 'Thailand'];
 
 export function OurHospitalsSection({ initialHospitals = [] }: { initialHospitals?: HospitalData[] }) {
   const [selectedCountry, setSelectedCountry] = useState('All');
 
-  // Use initial hospitals from DB, and append fallbacks for display diversity if needed
-  const displayHospitals = initialHospitals.length > 0 
-    ? initialHospitals.map(h => ({
-        ...h,
-        image: h.image || 'https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?w=600&auto=format&fit=crop&q=80'
-      }))
-    : fallbackHospitals;
+  const baseList = initialHospitals.length > 0 ? initialHospitals : fallbackHospitals;
+  const displayHospitals = baseList.map(h => ({
+    ...h,
+    image: getHospitalLocalImage(h)
+  }));
 
   const filteredHospitals = selectedCountry === 'All'
     ? displayHospitals
@@ -114,9 +123,9 @@ export function OurHospitalsSection({ initialHospitals = [] }: { initialHospital
                     className="group flex flex-col bg-card border border-border rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
                   >
                     {/* Hospital Image */}
-                    <div className="aspect-[4/3] relative w-full overflow-hidden bg-muted">
+                    <Link href={`/hospital/${hospital.slug}`} className="aspect-[4/3] relative w-full overflow-hidden bg-muted block">
                       <Image
-                        src={hospital.image || 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=400&auto=format&fit=crop&q=80'}
+                        src={hospital.image || '/assets/images/hospitals/apollo_hospital_chennai.webp'}
                         alt={hospital.name}
                         fill
                         sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33.33vw, 25vw"
@@ -126,14 +135,16 @@ export function OurHospitalsSection({ initialHospitals = [] }: { initialHospital
                         <MapPin className="w-3.5 h-3.5" />
                         <span>{hospital.country}</span>
                       </div>
-                    </div>
+                    </Link>
 
                     {/* Card Content */}
                     <div className="p-5 flex flex-col flex-grow justify-between space-y-4">
                       <div className="space-y-2">
-                        <h3 className="text-md font-bold text-foreground line-clamp-1 group-hover:text-primary transition-colors">
-                          {hospital.name}
-                        </h3>
+                        <Link href={`/hospital/${hospital.slug}`} className="block">
+                          <h3 className="text-md font-bold text-foreground line-clamp-1 group-hover:text-primary transition-colors">
+                            {hospital.name}
+                          </h3>
+                        </Link>
                         <p className="text-xs text-muted-foreground line-clamp-3 leading-relaxed">
                           {hospital.description}
                         </p>
@@ -145,7 +156,7 @@ export function OurHospitalsSection({ initialHospitals = [] }: { initialHospital
                         </span>
                         
                         <Link 
-                          href={`/medical-tourism?hospital=${hospital.slug}`}
+                          href={`/hospital/${hospital.slug}`}
                           className="inline-flex items-center text-xs font-bold text-primary hover:underline gap-1 group/btn"
                         >
                           Read More 

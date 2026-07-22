@@ -1,5 +1,5 @@
 export const productTitles = [
-  "Shahjalal Enterprise Wellness Pro",
+  "Shah Jalal EnterPrise Wellness Pro",
   "Urban Velocity Sneakers",
   "CloudWalk Elite Performance",
   "Stealth Neo-Classic Lows",

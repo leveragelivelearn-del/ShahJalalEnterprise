@@ -34,7 +34,7 @@ export default async function PublicLayout({ children }: { children: React.React
 
   return (
     <>
-      {showBlocker && <SubscriptionBlocker brandName={settings?.brandName || 'Shahjalal Enterprise'} />}
+      {showBlocker && <SubscriptionBlocker brandName={settings?.brandName || 'Shah Jalal EnterPrise'} />}
       <Navbar style={ui.navbar} />
       <main className="flex-1 pb-16 md:pb-0">{children}</main>
       <Footer style={ui.footer} />

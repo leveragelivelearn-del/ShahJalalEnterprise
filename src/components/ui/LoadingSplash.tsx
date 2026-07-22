@@ -51,9 +51,9 @@ export default function LoadingSplash({
           }}
           className="relative w-24 h-24 rounded-full flex items-center justify-center shadow-lg bg-white overflow-hidden p-1"
         >
-          <img 
-            src={logoUrl || "/logo.webp"} 
-            alt={activeBrandName} 
+          <img
+            src={logoUrl || "/logo.webp"}
+            alt={activeBrandName}
             className="w-full h-full object-contain rounded-full"
           />
 
@@ -111,7 +111,7 @@ export default function LoadingSplash({
           transition={{ delay: 1.2, duration: 0.5 }}
           className="text-sm md:text-md font-medium tracking-widest uppercase text-white/90"
         >
-          Global Trade & Medical Tourism
+          An Exclusive Consulting Firm
         </motion.p>
 
         {/* Loading Bar */}

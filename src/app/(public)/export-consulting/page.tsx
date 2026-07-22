@@ -1,15 +1,19 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
+import Image from 'next/image';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { FileCheck, Globe, CheckCircle2, ArrowRight, BookOpen, UserCheck } from 'lucide-react';
+import { FileCheck, Globe, CheckCircle2, ArrowRight, BookOpen, UserCheck, PackageCheck, Info } from 'lucide-react';
 import Swal from 'sweetalert2';
+import { ExportProductsSection } from '@/components/storefront/ExportProductsSection';
 
 export default function ExportConsulting() {
   const [productType, setProductType] = useState('');
   const [destination, setDestination] = useState('');
   const [generatedChecklist, setGeneratedChecklist] = useState<string[]>([]);
+
+
 
   const handleGenerate = (e: React.FormEvent) => {
     e.preventDefault();
@@ -123,10 +127,10 @@ export default function ExportConsulting() {
         {/* Hero Banner */}
         <div className="rounded-2xl bg-primary text-primary-foreground p-8 md:p-12 text-center space-y-6 shadow-xl">
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight font-heading">
-            Global Trade: Export Consultation Services
+            Product Sourcing and Development
           </h1>
-          <p className="max-w-2xl mx-auto text-lg opacity-90">
-            Empowering Bangladeshi enterprises to reach global markets. Strategic guides, buyer matching, documentation checklists, and regulatory compliance.
+          <p className="max-w-2xl mx-auto text-lg opacity-90 font-medium">
+            Marketing and sales development consultancy
           </p>
           <div className="flex justify-center">
             <Button onClick={handleBookConsultation} className="bg-background text-primary hover:bg-muted font-semibold px-8 py-6 rounded-lg text-md shadow-lg">
@@ -134,6 +138,10 @@ export default function ExportConsulting() {
             </Button>
           </div>
         </div>
+
+        {/* Featured Export Products Showcase Section */}
+        {/* Featured Export Products Showcase Section */}
+        <ExportProductsSection />
 
         {/* Info Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

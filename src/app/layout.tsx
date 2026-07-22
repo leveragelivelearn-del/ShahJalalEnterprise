@@ -190,8 +190,8 @@ export async function generateMetadata(): Promise<Metadata> {
     return {
       metadataBase: new URL(baseUrl),
       title: {
-        default: settings.metaTitle || settings.brandName || "Shahjalal Enterprise",
-        template: `%s | ${settings.brandName || "Shahjalal Enterprise"}`,
+        default: settings.metaTitle || settings.brandName || "Shah Jalal EnterPrise",
+        template: `%s | ${settings.brandName || "Shah Jalal EnterPrise"}`,
       },
       description: settings.metaDescription || settings.brandName || "Your ultimate destination for quality products.",
       manifest: '/manifest.json',
@@ -203,21 +203,21 @@ export async function generateMetadata(): Promise<Metadata> {
       appleWebApp: {
         capable: true,
         statusBarStyle: 'default',
-        title: settings.brandName || "Shahjalal Enterprise",
+        title: settings.brandName || "Shah Jalal EnterPrise",
       },
       formatDetection: {
         telephone: false,
       },
       openGraph: {
-        title: settings.metaTitle || settings.brandName || "Shahjalal Enterprise",
+        title: settings.metaTitle || settings.brandName || "Shah Jalal EnterPrise",
         description: settings.metaDescription || settings.brandName || "Your ultimate destination for quality products.",
         url: baseUrl,
-        siteName: settings.brandName || "Shahjalal Enterprise",
+        siteName: settings.brandName || "Shah Jalal EnterPrise",
         type: 'website',
       },
       twitter: {
         card: 'summary_large_image',
-        title: settings.metaTitle || settings.brandName || "Shahjalal Enterprise",
+        title: settings.metaTitle || settings.brandName || "Shah Jalal EnterPrise",
         description: settings.metaDescription || settings.brandName || "Your ultimate destination for quality products.",
       },
       verification: {
@@ -234,7 +234,7 @@ export async function generateMetadata(): Promise<Metadata> {
     };
   } catch (error) {
     return {
-      title: "Shahjalal Enterprise",
+      title: "Shah Jalal EnterPrise",
       description: "Your ultimate destination for quality products.",
     };
   }

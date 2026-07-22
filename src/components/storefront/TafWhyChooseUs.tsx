@@ -1,25 +1,43 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ShieldCheck, HeartPulse, Sparkles, MessageCircle, Plus, PhoneCall } from 'lucide-react';
+import { ShieldCheck, HeartPulse, Sparkles, MessageCircle, Plus, PhoneCall, Globe, Stethoscope, FileCheck, Building2 } from 'lucide-react';
 
-const reasons = [
+const tradeReasons = [
   {
     icon: ShieldCheck,
-    title: 'Expert Trade Compliance',
-    desc: 'We handle complex customs clearing and global sourcing structures with absolute compliance and zero delay.',
+    title: 'Expert Trade & Customs Compliance',
+    desc: 'We handle complex customs clearing, HS Code tariff verification, and global sourcing structures with absolute compliance and zero delay.',
   },
   {
-    icon: HeartPulse,
-    title: 'Emergency Healthcare Logistics',
-    desc: 'Immediate 24/7 air and road ambulance dispatch along with expedited medical visa invitations.',
+    icon: FileCheck,
+    title: 'Verified Global Supplier Networks',
+    desc: 'Direct connection with compliance-certified manufacturers and exporters across China, India, Europe, and Vietnam.',
   },
   {
     icon: Sparkles,
-    title: 'Global Hospital Connections',
-    desc: 'Direct partnership and verified priority booking slots at the most advanced tertiary hospitals globally.',
+    title: 'L/C & Financial Risk Protection',
+    desc: 'Protecting transaction security with Bank Letter of Credit (L/C) reviews, TT advisories, and export credit guarantee support.',
+  },
+];
+
+const medicalReasons = [
+  {
+    icon: HeartPulse,
+    title: 'Emergency Healthcare Logistics',
+    desc: 'Immediate 24/7 air evacuation and ICU ground ambulance dispatch along with expedited medical visa invitation letters.',
+  },
+  {
+    icon: Building2,
+    title: 'Partner Hospital Priority Booking',
+    desc: 'Direct partnership and verified priority doctor appointment slots at top JCI-accredited tertiary hospitals globally.',
+  },
+  {
+    icon: Sparkles,
+    title: 'Dedicated Bengali Patient Liaison',
+    desc: 'Personal Bengali-speaking patient coordinator assisting throughout treatment, medical report translation, and hotel stay.',
   },
 ];
 
@@ -31,8 +49,12 @@ const avatars = [
 ];
 
 export function TafWhyChooseUs() {
+  const [division, setDivision] = useState<'trade' | 'medical'>('trade');
+
+  const currentReasons = division === 'trade' ? tradeReasons : medicalReasons;
+
   return (
-    <section className="py-16 md:py-24 bg-background">
+    <section className="py-16 md:py-24 bg-background border-b border-border">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
@@ -45,18 +67,44 @@ export function TafWhyChooseUs() {
                 Why choose us
               </p>
               <h2 className="text-4xl md:text-5xl font-bold text-foreground leading-tight">
-                Consultancy &amp; Sourcing
+                Dedicated Expertise
                 <br />
                 <span className="italic font-light">you can trust</span>
               </h2>
               <p className="text-muted-foreground text-sm leading-relaxed max-w-md">
-                We blend time-honored techniques with the finest global networks to deliver trade advisory and patient care services that exceed client expectations.
+                We maintain specialized, dedicated teams for each business division to deliver tailored advisory and client care that exceeds expectations.
               </p>
+
+              {/* Division Selector Tabs */}
+              <div className="flex items-center justify-between gap-1.5 pt-2 w-full max-w-md bg-muted p-1 rounded-xl border border-border">
+                <button
+                  onClick={() => setDivision('trade')}
+                  className={`flex-1 flex items-center justify-center gap-1.5 px-2 sm:px-4 py-2 rounded-lg font-bold text-[11px] sm:text-xs whitespace-nowrap transition-all duration-300 ${
+                    division === 'trade'
+                      ? 'bg-primary text-primary-foreground shadow-md'
+                      : 'text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  <Globe className="w-3.5 h-3.5 shrink-0" />
+                  <span>Global Trade<span className="hidden sm:inline"> Division</span></span>
+                </button>
+                <button
+                  onClick={() => setDivision('medical')}
+                  className={`flex-1 flex items-center justify-center gap-1.5 px-2 sm:px-4 py-2 rounded-lg font-bold text-[11px] sm:text-xs whitespace-nowrap transition-all duration-300 ${
+                    division === 'medical'
+                      ? 'bg-primary text-primary-foreground shadow-md'
+                      : 'text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  <Stethoscope className="w-3.5 h-3.5 shrink-0" />
+                  <span>Medical Tourism<span className="hidden sm:inline"> Division</span></span>
+                </button>
+              </div>
             </div>
 
             {/* Reasons list */}
             <div className="space-y-0 divide-y divide-border">
-              {reasons.map((r, i) => (
+              {currentReasons.map((r, i) => (
                 <div key={i} className="flex items-start gap-4 py-5">
                   <div className="h-11 w-11 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0 mt-0.5">
                     <r.icon className="h-5 w-5" strokeWidth={1.5} />
@@ -78,8 +126,12 @@ export function TafWhyChooseUs() {
               {/* Main consultant/medical image — tall */}
               <div className="relative flex-1 rounded-2xl overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&auto=format&fit=crop&q=80"
-                  alt="Senior consultant team"
+                  src={
+                    division === 'trade'
+                      ? 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&auto=format&fit=crop&q=80'
+                      : '/assets/images/hospitals/apollo_hospital_chennai.webp'
+                  }
+                  alt={division === 'trade' ? 'Trade Sourcing Consultants' : 'Medical Tourism Assistance'}
                   fill
                   sizes="(max-width: 1024px) 50vw, 25vw"
                   className="object-cover"
@@ -93,7 +145,7 @@ export function TafWhyChooseUs() {
                     </div>
                     <div>
                       <p className="text-xs font-bold">Got questions?</p>
-                      <p className="text-[11px] text-primary-foreground/80">we&apos;re here to help!</p>
+                      <p className="text-[11px] text-primary-foreground/80">Our division advisors are here!</p>
                     </div>
                   </div>
                 </div>
@@ -110,7 +162,7 @@ export function TafWhyChooseUs() {
                   ))}
                 </div>
                 <p className="text-primary-foreground font-bold text-sm mt-2">
-                  More Than 1K+ Trusted Clients
+                  More Than 1K+ Satisfied Clients
                 </p>
                 {/* Avatars */}
                 <div className="flex items-center mt-3">
@@ -158,11 +210,15 @@ export function TafWhyChooseUs() {
                 </Link>
               </div>
 
-              {/* Trade image — fills remaining space */}
+              {/* Division specific secondary image */}
               <div className="relative flex-1 rounded-2xl overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1516549655169-df83a0774514?w=400&auto=format&fit=crop&q=80"
-                  alt="Medical logistics consulting"
+                  src={
+                    division === 'trade'
+                      ? 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&auto=format&fit=crop&q=80'
+                      : '/assets/images/hospitals/raffles_hospital_singapore.webp'
+                  }
+                  alt={division === 'trade' ? 'Global Shipping Cargo' : 'International Hospital Facility'}
                   fill
                   sizes="(max-width: 1024px) 50vw, 25vw"
                   className="object-cover"
